@@ -14,6 +14,9 @@
                 @update:current-page="handleCurrentChange"
         />
     </div>
+    <div class="beian">
+        <el-link href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2023006825号-1</el-link>
+    </div>
 </template>
 
 <script>
@@ -104,5 +107,10 @@ export default {
     margin-top: 50px;
     margin-bottom: 100px;
     margin-right: 20vw;
+}
+
+.beian {
+    text-align: center;
+    font-size: 20px;
 }
 </style>

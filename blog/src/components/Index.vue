@@ -5,30 +5,28 @@
             <FullPage/>
         </div>
         <el-container id="main-container">
-            <div id="main-blog">
-                <Article/>
+            <div style=" position: absolute;">
+                <Canvas/>
             </div>
-            <div id="container-card">
-                <AsideBar/>
-            </div>
+            <el-container style="position: absolute">
+                <div id="main-blog">
+                    <Article/>
+                </div>
+                <div id="container-card">
+                    <AsideBar/>
+                </div>
+            </el-container>
         </el-container>
     </el-container>
 </template>
 
-<script>
+<script setup>
 
 import Article from "@/components/Article.vue";
 import FullPage from "@/components/FullPage.vue";
 import AsideBar from "@/components/AsideBar.vue";
+import Canvas from "@/components/Canvas.vue";
 
-export default {
-    name: 'Index',
-    components: {
-        AsideBar,
-        FullPage,
-        Article
-    }
-}
 </script>
 
 <style scoped>
@@ -44,10 +42,6 @@ export default {
 }
 
 #main-container {
-    background-image: url("http://119.91.22.108:9000/blog/white_snow.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
 }
 
 #main-blog {
@@ -62,6 +56,5 @@ export default {
     margin-bottom: 20px;
     margin-right: 8vw;
 }
-
 
 </style>
