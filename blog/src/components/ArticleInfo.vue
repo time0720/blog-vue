@@ -38,7 +38,7 @@ const articleInfo = history.state.articleInfo
 
 <style scoped>
 .archives-header {
-    background-image: url("http://119.91.22.108:9000/blog/lighthouse.jpg");
+    background-image: url("https://time7.top:9000/blog/lighthouse.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
@@ -47,7 +47,7 @@ const articleInfo = history.state.articleInfo
 }
 
 .category-main {
-    background-image: url("http://119.91.22.108:9000/blog/whiteblue.jpg");
+    background-image: url("https://time7.top:9000/blog/whiteblue.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;

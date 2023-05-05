@@ -94,7 +94,7 @@ export default {
 
 <style scoped>
 .category-header {
-    background-image: url("http://119.91.22.108:9000/blog/category.jpg");
+    background-image: url("https://time7.top:9000/blog/category.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -103,7 +103,7 @@ export default {
 }
 
 .category-main {
-    background-image: url("http://119.91.22.108:9000/blog/white_snow.jpg");
+    background-image: url("https://time7.top:9000/blog/white_snow.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

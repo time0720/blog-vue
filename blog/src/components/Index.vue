@@ -32,7 +32,7 @@ import Canvas from "@/components/Canvas.vue";
 <style scoped>
 
 #header-blog {
-    background-image: url("http://119.91.22.108:9000/blog/index.jpg");
+    background-image: url("https://time7.top:9000/blog/index.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

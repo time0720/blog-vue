@@ -19,6 +19,8 @@ module.exports = defineConfig({
         changeOrigin: true
       }
     },
+    //开启https
+    https: true,
     //添加后， WebSocket 就不会报错了
     client: {
       // 注意这里要换成当前的端口port，否则会一直刷新页面

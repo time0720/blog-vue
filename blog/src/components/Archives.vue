@@ -37,9 +37,8 @@
     </el-container>
 </template>
 
-<script>
+<script setup>
 import MenuBar from "@/components/MenuBar.vue";
-import Article from "@/components/Article.vue";
 import AsideBar from "@/components/AsideBar.vue";
 import axios from "axios";
 import {inject, reactive} from "vue";
@@ -47,68 +46,57 @@ import {Map} from "core-js/internals/map-helpers";
 import {Calendar} from "@element-plus/icons-vue";
 import {useRouter} from "vue-router";
 
-export default {
-    name: "Archives",
-    components: {Calendar, AsideBar, Article, MenuBar},
-    setup() {
-        const baseUrl = inject('baseUrl')
+const baseUrl = inject('baseUrl')
 
-        let articleList = reactive({
-            value: [{
-                articleId: 0,
-                categoryId: 0,
-                userId: 0,
-                articleTitle: '',
-                articleContent: '',
-                articlePicture: '',
-                deleteFlag: '',
-                creationDate: '',
-                lastUpdateTime: '',
-                categoryName: ''
-            }]
-        })
+let articleList = reactive({
+    value: [{
+        articleId: 0,
+        categoryId: 0,
+        userId: 0,
+        articleTitle: '',
+        articleContent: '',
+        articlePicture: '',
+        deleteFlag: '',
+        creationDate: '',
+        lastUpdateTime: '',
+        categoryName: ''
+    }]
+})
 
-        let articleMap = reactive(new Map())
-        axios.get(
-            baseUrl + '/article/selectAll'
-        ).then(
-            response => {
-                articleList.value = response.data.data
-                articleList.value.forEach(article => {
-                    let currentYearMonth = article.creationDate.substring(0, 7)
-                    if (articleMap[currentYearMonth] === undefined) {
-                        articleMap[currentYearMonth] = []
-                    }
-                    let articleArr = articleMap[currentYearMonth]
-                    articleArr.push(article)
-                    articleMap.set(currentYearMonth, articleArr)
-                })
-                console.log('articleMap', articleMap)
+let articleMap = reactive(new Map())
+// 在 axios 请求时，选择性忽略 SSL
+axios.get(
+    baseUrl + '/article/selectAll'
+).then(
+    response => {
+        articleList.value = response.data.data
+        articleList.value.forEach(article => {
+            let currentYearMonth = article.creationDate.substring(0, 7)
+            if (articleMap[currentYearMonth] === undefined) {
+                articleMap[currentYearMonth] = []
             }
-        )
-
-        const router = useRouter()
-        const queryArticleInfo = (article) => {
-            const articleInfo = JSON.parse(JSON.stringify(article))
-            router.push({
-                name: 'article',
-                params: {articleId: article.articleId},
-                state: {articleInfo}
-            })
-        }
-
-        return {
-            articleList,
-            articleMap,
-            queryArticleInfo
-        }
+            let articleArr = articleMap[currentYearMonth]
+            articleArr.push(article)
+            articleMap.set(currentYearMonth, articleArr)
+        })
+        console.log('articleMap', articleMap)
     }
-}
+)
+
+const router = useRouter()
+const queryArticleInfo = (article) => {
+    const articleInfo = JSON.parse(JSON.stringify(article))
+    router.push({
+        name: 'article',
+        params: {articleId: article.articleId},
+        state: {articleInfo}
+    })
+    }
 </script>
 
 <style scoped>
 .archives-header {
-    background-image: url("http://119.91.22.108:9000/blog/archives.jpg");
+    background-image: url("https://time7.top:9000/blog/archives.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -117,7 +105,7 @@ export default {
 }
 
 .archives-main {
-    background-image: url("http://119.91.22.108:9000/blog/white_snow.jpg");
+    background-image: url("https://time7.top:9000/blog/white_snow.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

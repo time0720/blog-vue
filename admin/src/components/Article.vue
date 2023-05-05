@@ -260,7 +260,7 @@ export default {
 
 <style scoped>
 .base-container {
-    background-image: url("http://119.91.22.108:9000/blog/back_index.jpg");
+    background-image: url("https://time7.top:9000/blog/back_index.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
@@ -273,7 +273,7 @@ export default {
 }
 
 .header-blog {
-    background-image: url("http://119.91.22.108:9000/blog/moon.jpg");
+    background-image: url("https://time7.top:9000/blog/moon.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;

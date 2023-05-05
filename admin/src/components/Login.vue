@@ -101,7 +101,7 @@ export default {
 .login-index {
     width: 100vw;
     height: 100vh;
-    background-image: url("http://119.91.22.108:9000/blog/login.jpg");
+    background-image: url("https://time7.top:9000/blog/login.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

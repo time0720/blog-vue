@@ -2,7 +2,7 @@
     <!--网站作者信息-->
     <el-card class="card-item">
         <div class="avatar-img">
-            <el-image src="http://119.91.22.108:9000/blog/web_head.jpg" />
+            <el-image src="https://time7.top:9000/blog/web_head.jpg" />
         </div>
         <h1 class="avatar-name">时光</h1>
         <br>
