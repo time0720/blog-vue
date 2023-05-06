@@ -19,87 +19,31 @@
     </div>
 </template>
 
-<script>
-import {inject, onMounted, provide, reactive, ref} from "vue";
-import axios from "axios";
+<script setup>
+import {onMounted, ref} from "vue";
 import ArticleItem from "@/components/ArticleItem.vue";
+import {total, selectArticles, articleListQuery} from "@/store"
 
-export default {
-    name: "Article",
-    components: {ArticleItem},
-    setup: function () {
-        const baseUrl = inject('baseUrl')
+onMounted(() => {
+    selectArticles()
+})
 
-        let articleList = reactive({
-            value: [{
-                articleId: 0,
-                categoryId: 0,
-                userId: 0,
-                articleTitle: '',
-                articleContent: '',
-                articlePicture: '',
-                deleteFlag: '',
-                creationDate: '',
-                lastUpdateTime: '',
-                categoryName: '',
-                index: 0
-            }]
-        })
-        let articleListQuery = reactive({
-            pageNum: 1,
-            pageSize: 5
-        })
-
-        onMounted(() => {
-            selectArticles()
-        })
-
-        let total = ref(0)
-        // const token = Cookies.get('token')
-        const selectArticles = () => {
-            axios.get(
-                baseUrl + '/article/selectArticle', {
-                    params: articleListQuery
-                }
-            ).then(
-                response => {
-                    articleList.value = response.data.data.list
-                    articleList.value.forEach((article, index) => {
-                        article.index = index
-                    })
-                    total.value = response.data.data.total
-                }
-            )
-        }
-
-        //分页功能
-        let pageSize = ref(5)
-        const handleSizeChange = (value) => {
-            articleListQuery.pageSize = value
-            pageSize.value = value
-            console.log('pageSize', pageSize.value)
-            selectArticles()
-        }
-        let currentPage = ref(1)
-        const handleCurrentChange = (value) => {
-            articleListQuery.pageNum = value
-            currentPage.value = value
-            console.log('currentPage', currentPage.value)
-            selectArticles()
-        }
-
-        provide('articleList', articleList)
-
-        return {
-            articleList,
-            total,
-            handleSizeChange,
-            handleCurrentChange,
-            pageSize,
-            currentPage
-        }
-    }
+//分页功能
+let pageSize = ref(5)
+const handleSizeChange = (value) => {
+    articleListQuery.pageSize = value
+    pageSize.value = value
+    console.log('pageSize', pageSize.value)
+    selectArticles()
 }
+let currentPage = ref(1)
+const handleCurrentChange = (value) => {
+    articleListQuery.pageNum = value
+    currentPage.value = value
+    console.log('currentPage', currentPage.value)
+    selectArticles()
+}
+
 </script>
 
 <style scoped>

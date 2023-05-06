@@ -5,7 +5,7 @@
             <nav><MenuBar/></nav>
             <!--背景图片和字体-->
             <div class="archives-bg">
-                <h1>{{articleInfo.articleTitle}}</h1>
+                <h1>{{article.articleTitle}}</h1>
             </div>
         </div>
         <el-container class="category-main">
@@ -13,7 +13,7 @@
                 <!--TODO: 目录的获取与展示-->
                 <el-card>
                     <MdEditor
-                            v-model="articleInfo.articleContent"
+                            v-model="article.articleContent"
                             :preview-only="true"
                     >
                     </MdEditor>
@@ -31,8 +31,22 @@ import MenuBar from "@/components/MenuBar.vue";
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import AsideBar from "@/components/AsideBar.vue";
+import {queryArticleDetail} from "@/store"
+import router from "@/router/index"
+import {reactive} from "vue";
 
-const articleInfo = history.state.articleInfo
+
+let article = reactive({
+    articleTitle: '',
+    articleContent: ''
+})
+
+const articleId = router.currentRoute.value.params.articleId
+queryArticleDetail(articleId).then(res => {
+    let articleInfo = res
+    article.articleTitle = articleInfo.articleTitle
+    article.articleContent = articleInfo.articleContent
+})
 
 </script>
 

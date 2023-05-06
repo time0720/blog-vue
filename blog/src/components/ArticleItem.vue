@@ -5,48 +5,26 @@
                 <el-row class="block">
                     <!--article.index % 2 === 0和下面的article.index % 2 === 1决定了图片和文字的左右控制-->
                     <el-col :span="10" class="el-col-img" v-if="article.index % 2 === 0">
-                        <el-image :src=article.articlePicture @click="queryArticleInfo(article)" class="img"/>
+                        <el-image :src=article.articlePicture @click="queryArticleDetail(article.articleId)" class="img"/>
                     </el-col>
                     <el-col :span="14" class="el-col-title" >
-                        <p class="article-title" @click="queryArticleInfo(article)">{{article.articleTitle}}</p>
+                        <p class="article-title" @click="queryArticleDetail(article.articleId)">{{article.articleTitle}}</p>
                         <span class="date"><el-icon size="larger"><Calendar/></el-icon>发布于 {{article.creationDate.substring(0,10)}}</span>
                         <span class="date"><el-icon size="larger"><Operation/></el-icon>文章类型: {{article.categoryName}}</span>
                     </el-col>
                     <el-col :span="10" class="el-col-img" v-if="article.index % 2 === 1">
-                        <el-image :src=article.articlePicture @click="queryArticleInfo(article)" class="img"/>
+                        <el-image :src=article.articlePicture @click="queryArticleDetail(article.articleId)" class="img"/>
                     </el-col>
                 </el-row>
             </el-card>
         </el-row>
     </div>
 </template>
-<script>
-import {inject, ref} from "vue";
-import {useRouter} from "vue-router";
+<script setup>
 import {Calendar, Operation} from "@element-plus/icons-vue";
+import {articleList, queryArticleDetail} from "@/store"
 
-export default {
-    name: "ArticleItem",
-    components: {Operation, Calendar},
-    setup() {
-        const articleList = inject('articleList')
 
-        const router = useRouter()
-        const queryArticleInfo = (article) => {
-            const articleInfo = JSON.parse(JSON.stringify(article))
-            router.push({
-                name: 'article',
-                params: {articleId: article.articleId},
-                state: {articleInfo}
-            })
-        }
-
-        return {
-            articleList,
-            queryArticleInfo
-        }
-    }
-}
 </script>
 
 <style scoped>

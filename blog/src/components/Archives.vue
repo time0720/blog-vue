@@ -19,11 +19,11 @@
                         <el-card class="article-card">
                             <el-row class="block">
                                 <el-col :span="4" class="col-img">
-                                    <el-image :src="article.articlePicture" @click="queryArticleInfo(article)" class="img"/>
+                                    <el-image :src="article.articlePicture" @click="queryArticleDetail(article.articleId)" class="img"/>
                                 </el-col>
                                 <el-col :span="20" class="col-title" >
                                     <span class="date"><el-icon size="larger"><Calendar/></el-icon>{{article.creationDate.substring(0,10)}}</span>
-                                    <p class="title" @click="queryArticleInfo(article)">{{article.articleTitle}}</p>
+                                    <p class="title" @click="queryArticleDetail(article.articleId)">{{article.articleTitle}}</p>
                                 </el-col>
                             </el-row>
                         </el-card>
@@ -40,58 +40,9 @@
 <script setup>
 import MenuBar from "@/components/MenuBar.vue";
 import AsideBar from "@/components/AsideBar.vue";
-import axios from "axios";
-import {inject, reactive} from "vue";
-import {Map} from "core-js/internals/map-helpers";
 import {Calendar} from "@element-plus/icons-vue";
-import {useRouter} from "vue-router";
+import {articleList, articleMap, queryArticleDetail} from "@/store"
 
-const baseUrl = inject('baseUrl')
-
-let articleList = reactive({
-    value: [{
-        articleId: 0,
-        categoryId: 0,
-        userId: 0,
-        articleTitle: '',
-        articleContent: '',
-        articlePicture: '',
-        deleteFlag: '',
-        creationDate: '',
-        lastUpdateTime: '',
-        categoryName: ''
-    }]
-})
-
-let articleMap = reactive(new Map())
-// 在 axios 请求时，选择性忽略 SSL
-axios.get(
-    baseUrl + '/article/selectAll'
-).then(
-    response => {
-        articleList.value = response.data.data
-        articleList.value.forEach(article => {
-            let currentYearMonth = article.creationDate.substring(0, 7)
-            if (articleMap[currentYearMonth] === undefined) {
-                articleMap[currentYearMonth] = []
-            }
-            let articleArr = articleMap[currentYearMonth]
-            articleArr.push(article)
-            articleMap.set(currentYearMonth, articleArr)
-        })
-        console.log('articleMap', articleMap)
-    }
-)
-
-const router = useRouter()
-const queryArticleInfo = (article) => {
-    const articleInfo = JSON.parse(JSON.stringify(article))
-    router.push({
-        name: 'article',
-        params: {articleId: article.articleId},
-        state: {articleInfo}
-    })
-    }
 </script>
 
 <style scoped>

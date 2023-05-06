@@ -21,74 +21,66 @@
     </el-container>
 </template>
 
-<script>
+<script setup>
 import MenuBar from "@/components/MenuBar.vue";
 import AsideBar from "@/components/AsideBar.vue";
-import axios from "axios";
 import * as echarts from 'echarts';
-import {inject, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
+import axios from "axios";
+import {baseUrl} from "@/store";
 
-export default {
-    name: "Category",
-    components: {AsideBar, MenuBar},
-    setup() {
-        const baseUrl = inject('baseUrl')
+onMounted(() => {
+    drawChart()
+})
 
-        onMounted(() => {
-            drawChart()
-        })
-
-        //echarts图标
-        const drawChart = async () => {
-            let myChart = echarts.init(document.getElementById('main-category'));
-            let categoryList = ref([])
-
-            await axios.get(
-                baseUrl + '/category/getCategoryList'
-            ).then(
-                response => {
-                    categoryList = response.data.data
-                }
-            )
-            myChart.setOption({
-                tooltip: {
-                    trigger: 'item'
-                },
-                legend: {
-                    top: '5%',
-                    left: 'center'
-                },
-                series: [
-                    {
-                        name: 'Access From',
-                        type: 'pie',
-                        radius: ['40%', '70%'],
-                        avoidLabelOverlap: false,
-                        itemStyle: {
-                            borderRadius: 10,
-                            borderColor: '#fff',
-                            borderWidth: 2
-                        },
-                        label: {
-                            show: false,
-                            position: 'center'
-                        },
-                        emphasis: {
-                            label: {
-                                show: true,
-                                fontSize: 40,
-                                fontWeight: 'bold'
-                            }
-                        },
-                        labelLine: {
-                            show: false
-                        },
-                        data: categoryList
-                    }]
-            })
+//echarts图标
+const drawChart = async () => {
+    let myChart = echarts.init(document.getElementById('main-category'));
+    //分类列表
+    let categoryList = ref([])
+    await axios.get(
+        baseUrl + '/category/getCategoryList'
+    ).then(
+        response => {
+            categoryList = response.data.data
         }
-
-    }
+    )
+    myChart.setOption({
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '5%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: 'Access From',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: categoryList
+            }]
+    })
 }
 </script>
 

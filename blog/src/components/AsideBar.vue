@@ -21,13 +21,9 @@
     </el-card>
 </template>
 
-<script>
+<script setup>
 import {Message, Phone} from "@element-plus/icons-vue";
 
-export default {
-    name: "AsideBar",
-    components: {Message, Phone}
-}
 </script>
 
 <style scoped>

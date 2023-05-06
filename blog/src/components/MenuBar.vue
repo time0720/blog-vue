@@ -31,7 +31,7 @@
             <template #title>
                 <span class="menu-item"><el-icon><Document/></el-icon>起步文档</span>
             </template>
-            <el-menu-item class="menu-sub-item" @click="queryArticleInfo(10012)">已实现&未实现</el-menu-item>
+            <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10012)">已实现&未实现</el-menu-item>
             <el-menu-item class="menu-sub-item">本站说明</el-menu-item>
             <el-menu-item class="menu-sub-item">环境搭建</el-menu-item>
         </el-sub-menu>
@@ -100,64 +100,20 @@
     </el-dialog>
 </template>
 
-<script>
-import {
-    Avatar,
-    ChatLineRound,
-    Collection,
-    Compass,
-    Document,
-    FolderOpened,
-    House, Search,
-    VideoPlay,
-    View
-} from "@element-plus/icons-vue";
-import {inject, ref} from "vue";
-import {useRouter} from "vue-router";
-import axios from "axios";
+<script setup>
+import {Avatar, ChatLineRound, Collection, Compass, Document, FolderOpened, House, Search, VideoPlay, View} from "@element-plus/icons-vue";
+import {ref} from "vue";
+import {queryArticleDetail} from "@/store";
 
-export default {
-    name: "MenuBar",
-    components: {Search, Avatar, VideoPlay, FolderOpened, View, ChatLineRound, Collection, Document, Compass, House},
-    setup() {
-
-        //搜索框
-        const dialogVisible = ref(false)
-        const keyWord = ref('')
-        const searchKeyWord = () => {
-            console.log(keyWord.value)
-        }
-
-        //分类列表
-        const baseUrl = inject('baseUrl')
-        const router = useRouter()
-        
-        const queryArticleInfo = async (articleId) => {
-            let article
-            await axios.get(
-                baseUrl + '/article/detail/' + articleId
-            ).then(
-                response => {
-                    article = response.data.data
-                }
-            )
-            let articleInfo = JSON.parse(JSON.stringify(article))
-            await router.push({
-                name: 'article',
-                params: {articleId: articleId},
-                state: {articleInfo}
-            })
-        }
-
-
-        return {
-            dialogVisible,
-            keyWord,
-            searchKeyWord,
-            queryArticleInfo
-        }
-    }
+//搜索框
+const dialogVisible = ref(false)
+const keyWord = ref('')
+const searchKeyWord = () => {
+    console.log(keyWord.value)
 }
+
+
+
 </script>
 
 <style scoped>

@@ -13,13 +13,9 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import MenuBar from "@/components/MenuBar.vue";
 
-export default {
-    name: "IndexPage",
-    components: {MenuBar}
-}
 </script>
 
 <style scoped>
