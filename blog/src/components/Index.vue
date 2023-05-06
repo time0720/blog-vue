@@ -5,10 +5,10 @@
             <FullPage/>
         </div>
         <el-container id="main-container">
-            <div style=" position: absolute;">
-                <Canvas/>
+            <div style=" position: absolute;width: 100vw">
+                <Canvas style="width: 100vw"/>
             </div>
-            <el-container style="position: absolute">
+            <el-container style="position: absolute;width: 100vw">
                 <div id="main-blog">
                     <Article/>
                 </div>

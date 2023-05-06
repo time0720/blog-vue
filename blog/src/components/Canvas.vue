@@ -10,8 +10,8 @@ import {onMounted} from "vue";
 onMounted(() => {
     const cvs = document.querySelector('canvas')
     const ctx = cvs.getContext('2d')
-    cvs.width = window.innerWidth * devicePixelRatio
-    cvs.height = window.innerHeight * (devicePixelRatio - 0.4)
+    cvs.width = window.innerWidth
+    cvs.height = window.innerHeight
 
     function getRandom(min, max) {
         return Math.floor(Math.random() * (max + 1 - min) + min)
