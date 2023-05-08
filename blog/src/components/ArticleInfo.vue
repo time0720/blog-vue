@@ -88,7 +88,8 @@ queryArticleDetail(articleId).then(res => {
     }
 
     #main-blog {
-        width: 100%;
+        width: 100vw;
+        min-height: 70vh;
         margin-top: 1rem;
         margin-left: 5vw;
         margin-right: 5vw;
