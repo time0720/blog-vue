@@ -64,6 +64,7 @@
                         :toolbarsExclude="toolbarsExclude"
                         v-model="articleInfo.articleContent"
                         @onUploadImg="onUploadImg"
+                        style="height: 90vh"
                 >
                 </MdEditor>
             </div>
@@ -264,12 +265,13 @@ const onUploadImg = async (files) => {
 }
 
 .main-container {
-    width: 88vw;
+    width: 99vw;
 }
 
 .article-editor {
     margin-left: 2vw;
-    width: 80vw;
+    margin-bottom: 5vw;
+    width: 100vw;
 }
 
 .editor-btn {
