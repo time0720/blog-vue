@@ -85,46 +85,78 @@ const drawChart = async () => {
 </script>
 
 <style scoped>
-.category-header {
-    background-image: url("https://time7.top:9000/blog/category.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    width: 100vw;
-    height: 50vh;
+@media screen and (min-device-width: 768px) {
+    .category-main {
+        background-image: url("https://time7.top:9000/blog/white_snow.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    #main-blog {
+        width: 70%;
+        margin-top: 20px;
+        margin-left: 8vw;
+        margin-right: 10px;
+    }
+
+    #main-category {
+        width: 100%;
+        height: 70%;
+    }
+
+    #category-card {
+        width: 20%;
+        margin-bottom: 20px;
+        margin-right: 8vw;
+    }
+
+    .category-header {
+        background-image: url("https://time7.top:9000/blog/category.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 100vw;
+        height: 50vh;
+    }
 }
 
-.category-main {
-    background-image: url("https://time7.top:9000/blog/white_snow.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+@media screen and (max-device-width: 768px) {
+    .category-main {
+        background-image: url("https://time7.top:9000/blog/white_snow.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #main-blog {
+        width: 100vw;
+        margin-top: 2rem;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+
+    #main-category {
+        width: 100%;
+        height: 50%;
+    }
+
+    .category-header {
+        background-image: url("https://time7.top:9000/blog/category.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 100vw;
+        height: 30vh;
+    }
 }
 
 .category-bg {
     color: white;
     text-align: center;
     margin-top: 10%;
-    font-size: 30px;
+    font-size: 2rem;
 }
-
-#main-blog {
-    width: 70%;
-    margin-top: 20px;
-    margin-left: 8vw;
-    margin-right: 10px;
-}
-
-
-#category-card {
-    width: 20%;
-    margin-bottom: 20px;
-    margin-right: 8vw;
-}
-
-#main-category {
-    width: 100%;
-    height: 70%;
-}
-
 </style>

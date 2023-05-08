@@ -46,13 +46,47 @@ import {articleList, articleMap, queryArticleDetail} from "@/store"
 </script>
 
 <style scoped>
-.archives-header {
-    background-image: url("https://time7.top:9000/blog/archives.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    width: 100vw;
-    height: 50vh;
+@media screen and (min-device-width: 768px) {
+    #main-blog {
+        width: 70%;
+        margin-left: 8vw;
+        margin-right: 30px;
+        margin-bottom: 100px;
+    }
+
+
+    #archives-card {
+        width: 20%;
+        margin-bottom: 20px;
+        margin-right: 8vw;
+    }
+
+    .archives-header {
+        background-image: url("https://time7.top:9000/blog/archives.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 100vw;
+        height: 50vh;
+    }
+}
+
+@media screen and (max-device-width: 768px) {
+    #main-blog {
+        width: 100vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        margin-bottom: 5rem;
+    }
+
+    .archives-header {
+        background-image: url("https://time7.top:9000/blog/archives.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 100vw;
+        height: 30vh;
+    }
 }
 
 .archives-main {
@@ -67,20 +101,6 @@ import {articleList, articleMap, queryArticleDetail} from "@/store"
     text-align: center;
     margin-top: 10%;
     font-size: 30px;
-}
-
-#main-blog {
-    width: 70%;
-    margin-left: 8vw;
-    margin-right: 30px;
-    margin-bottom: 100px;
-}
-
-
-#archives-card {
-    width: 20%;
-    margin-bottom: 20px;
-    margin-right: 8vw;
 }
 
 .article-card {

@@ -64,7 +64,7 @@ onMounted(() => {
     }
 
     class Graph {
-        constructor(pointNumber = 40, maxDis = 500) {
+        constructor(pointNumber = 30, maxDis = 500) {
             this.points = new Array(pointNumber).fill(0)
                 .map(() => new Point())
             this.maxDis = maxDis

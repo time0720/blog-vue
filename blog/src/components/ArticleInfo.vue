@@ -51,13 +51,48 @@ queryArticleDetail(articleId).then(res => {
 </script>
 
 <style scoped>
-.archives-header {
-    background-image: url("https://time7.top:9000/blog/lighthouse.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
-    width: 100vw;
-    height: 50vh;
+
+@media screen and (min-device-width: 768px) {
+    .archives-header {
+        background-image: url("https://time7.top:9000/blog/lighthouse.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        width: 100vw;
+        height: 50vh;
+    }
+
+    #main-blog {
+        width: 70%;
+        margin-top: 20px;
+        margin-left: 10vw;
+        margin-right: 8px;
+    }
+
+
+    #category-card {
+        width: 20%;
+        margin-bottom: 20px;
+        margin-right: 8vw;
+    }
+}
+
+@media screen and (max-device-width: 768px) {
+    .archives-header {
+        background-image: url("https://time7.top:9000/blog/lighthouse.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        width: 100vw;
+        height: 30vh;
+    }
+
+    #main-blog {
+        width: 100%;
+        margin-top: 1rem;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
 }
 
 .category-main {
@@ -71,20 +106,6 @@ queryArticleDetail(articleId).then(res => {
     color: white;
     text-align: center;
     margin-top: 10%;
-    font-size: 30px;
-}
-
-#main-blog {
-    width: 70%;
-    margin-top: 20px;
-    margin-left: 10vw;
-    margin-right: 8px;
-}
-
-
-#category-card {
-    width: 20%;
-    margin-bottom: 20px;
-    margin-right: 8vw;
+    font-size: 1.5rem;
 }
 </style>

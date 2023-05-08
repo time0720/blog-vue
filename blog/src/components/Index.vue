@@ -31,6 +31,26 @@ import Canvas from "@/components/Canvas.vue";
 
 <style scoped>
 
+@media screen and (min-device-width: 768px) {
+    #main-blog {
+        width: 70%;
+        margin-left: 8vw;
+        margin-right: 10px;
+    }
+
+    #container-card {
+        width: 20%;
+        margin-bottom: 20px;
+        margin-right: 8vw;
+    }
+}
+
+@media screen and (max-device-width: 768px) {
+    #main-blog {
+        width: 100vw;
+    }
+}
+
 #header-blog {
     background-image: url("https://time7.top:9000/blog/index.jpg");
     background-repeat: no-repeat;
@@ -39,22 +59,6 @@ import Canvas from "@/components/Canvas.vue";
     height: 100vh;
     width: 100vw;
     color: white;
-}
-
-#main-container {
-}
-
-#main-blog {
-    width: 70%;
-    margin-left: 8vw;
-    margin-right: 10px;
-}
-
-
-#container-card {
-    width: 20%;
-    margin-bottom: 20px;
-    margin-right: 8vw;
 }
 
 </style>

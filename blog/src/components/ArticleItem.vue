@@ -28,6 +28,49 @@ import {articleList, queryArticleDetail} from "@/store"
 </script>
 
 <style scoped>
+
+@media screen and (min-device-width: 768px) {
+    .block {
+        width: 60vw;
+        height: 20vh;
+    }
+
+    .article-title {
+        line-height: 80px;
+        font-size: 26px;
+        overflow: hidden;
+        margin: 10px 40px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .date {
+        margin: 10px 40px;
+        display: flex;
+    }
+}
+
+@media screen and (max-device-width: 768px) {
+    .block {
+        width: 90vw;
+        height: 10vh;
+    }
+
+    .article-title {
+        line-height: 1rem;
+        font-size: 0.8rem;
+        overflow: hidden;
+        margin: 0.8rem 2rem;
+    }
+
+    .date {
+        font-size: 0.8rem;
+        margin: 0.8rem 1rem;
+        display: flex;
+    }
+}
+
 .article-row {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -35,11 +78,6 @@ import {articleList, queryArticleDetail} from "@/store"
 
 #article-item {
     margin-top: 20px;
-}
-
-.block {
-    width: 60vw;
-    height: 20vh;
 }
 
 .img {
@@ -52,24 +90,10 @@ import {articleList, queryArticleDetail} from "@/store"
     transition: all 1.2s;
 }
 
-.article-title {
-    line-height: 80px;
-    font-size: 26px;
-    overflow: hidden;
-    margin: 10px 40px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
 
 .article-title:hover {
     color: #409EFF;
     transform: translateX(2vh);
-}
-
-.date {
-    margin: 10px 40px;
-    display: flex;
 }
 
 .el-col-img {

@@ -13,6 +13,13 @@ export default {
 </script>
 
 <style>
+/* 解决页面左右溢出 */
+html, body {
+    max-width: 100vw;
+
+    overflow-x: hidden;
+}
+
 .el-menu--collapse .el-menu .el-sub-menu, .el-menu--popup{
     min-width: 6rem!important;
 }

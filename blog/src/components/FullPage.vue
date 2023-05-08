@@ -20,11 +20,23 @@ import MenuBar from "@/components/MenuBar.vue";
 
 <style scoped>
 
-.index-font {
-    text-align: center;
-    margin-top: 15%;
-    font-size: 40px;
+@media screen and (min-device-width: 768px) {
+    .index-font {
+        text-align: center;
+        margin-top: 15%;
+        font-size: 2rem;
+    }
 }
+
+@media screen and (max-device-width: 768px) {
+    .index-font {
+        text-align: center;
+        margin-top: 55%;
+        font-size: 1.6rem;
+    }
+}
+
+
 
 #keyframes {
     margin: 0 auto;
