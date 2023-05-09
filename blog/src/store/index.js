@@ -138,7 +138,6 @@ export const commentsInfo = reactive({
 })
 //获取当前的路由
 export const fillComments = (Router) => {
-    console.log(Router)
     if (Router.fullPath === '/comments') {
         commentsInfo.articleId = -1
     } else if (Router.fullPath !== '/comments' && Router.params !== undefined && Router.params !== null) {

@@ -73,21 +73,10 @@ import {ElMessageBox} from "element-plus";
 import {commentsInfo, commentsList, fillComments, saveComments, selectComments} from "@/store"
 import {Location, StarFilled} from "@element-plus/icons-vue";
 import router from "@/router";
-import Cookies from "js-cookie"
 
 //根据路由来设置评论字段
 const Router = router.currentRoute.value
 fillComments(Router)
-console.log(commentsInfo)
-
-//TODO：根据当前token设置头像
-const token = Cookies.get('token')
-if (token !== undefined && token !== null && token !== '') {
-    commentsInfo.via = 'https://time7.top:9000/blog/web_head.jpg'
-    commentsInfo.commentsName = '时光'
-} else {
-    commentsInfo.via = 'https://time7.top:9000/blog/tourists.jpg'
-}
 
 onMounted(() => {
     selectComments(-1)
