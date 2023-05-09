@@ -2,6 +2,7 @@ import {reactive, ref} from "vue";
 import router from "@/router/index"
 import axios from "axios";
 import {Map} from "core-js/internals/map-helpers";
+import {ElMessage} from "element-plus";
 
 export const baseUrl = 'https://time7.top:8000'
 
@@ -86,3 +87,88 @@ export const queryArticleDetail = async (articleId) => {
     return articleInfo
 }
 
+//评论功能
+export const commentsList = reactive({
+    value: [{
+        commentsId: null,
+        commentsName: null,
+        ip: null,
+        address: null,
+        creationDate: null,
+        via: null,
+        content: null,
+        parentId: null,
+        like: null,
+        articleId: null,
+        index: null
+    }]
+})
+export const selectComments = (articleId) => {
+    axios.get(
+        baseUrl + '/comments/selectComments', {
+            params: {
+                pageNum: 1,
+                pageSize: 10,
+                articleId
+            }
+        }
+    ).then(
+        response => {
+            commentsList.value = response.data.data.list
+            let list = commentsList.value.reverse()
+            list.forEach((comments, index) => {
+                comments.index = index
+            })
+            commentsList.value = list.reverse()
+        }
+    )
+}
+
+export const commentsInfo = reactive({
+    commentsId: null,
+    commentsName: null,
+    ip: null,
+    address: null,
+    creationDate: null,
+    via: null,
+    content: null,
+    parentId: null,
+    upvote: null,
+    articleId: null
+})
+//获取当前的路由
+export const fillComments = (Router) => {
+    console.log(Router)
+    if (Router.fullPath === '/comments') {
+        commentsInfo.articleId = -1
+    } else if (Router.fullPath !== '/comments' && Router.params !== undefined && Router.params !== null) {
+        commentsInfo.articleId = Router.params.articleId
+    }
+}
+export const saveComments = async () => {
+    console.log(commentsInfo)
+     const res = await axios.post(
+        baseUrl + '/comments/addComments', commentsInfo,
+        {
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+    )
+    console.log(res)
+    //跳转回去
+    if (res.data.status === 200) {
+        ElMessage({
+            message: '保存成功！',
+            type: 'success'
+        })
+    } else if (res.data.status === 403) {
+        ElMessage({
+            type: "error",
+            message: res.data.message,
+        })
+    }
+    setTimeout(() => {
+        location.reload()
+    }, 1000)
+}

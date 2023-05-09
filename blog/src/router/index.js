@@ -21,6 +21,11 @@ const routes = [
         path: '/article/:articleId',
         name: 'article',
         component: () => import('../components/ArticleInfo.vue')
+    },
+    {
+        path: '/comments',
+        name: 'comments',
+        component: () => import('../components/Comments.vue')
     }
 ];
 const router = createRouter({

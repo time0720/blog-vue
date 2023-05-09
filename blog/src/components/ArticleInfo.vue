@@ -31,10 +31,14 @@ import MenuBar from "@/components/MenuBar.vue";
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import AsideBar from "@/components/AsideBar.vue";
-import {queryArticleDetail} from "@/store"
+import {commentsInfo, fillComments, queryArticleDetail} from "@/store"
 import router from "@/router/index"
 import {reactive} from "vue";
 
+//根据路由来设置评论字段
+const Router = router.currentRoute.value
+fillComments(Router)
+console.log(commentsInfo)
 
 let article = reactive({
     articleTitle: '',

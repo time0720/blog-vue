@@ -67,7 +67,7 @@
         <el-menu-item index="4-1" class="menu-sub-item"><el-icon><Picture/></el-icon>照片</el-menu-item>
         <el-menu-item index="4-2" class="menu-sub-item"><el-icon><VideoPlay/></el-icon>音频</el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="5" class="menu-item"><el-icon><ChatLineRound/></el-icon>评论区</el-menu-item>
+    <el-menu-item index="/comments" class="menu-item"><el-icon><ChatLineRound/></el-icon>评论区</el-menu-item>
 </template>
 
 <script>
