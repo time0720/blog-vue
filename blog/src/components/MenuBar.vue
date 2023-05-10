@@ -52,7 +52,7 @@
         </el-menu-item>
     </el-menu>
 
-    <el-drawer v-model="drawer" title="I am the title" :with-header="false" size="45%">
+    <el-drawer v-model="drawer" title="I am the title" :with-header="false" size="60%">
         <el-menu
             :router="true"
         >

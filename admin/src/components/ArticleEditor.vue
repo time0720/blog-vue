@@ -175,6 +175,7 @@ const saveArticle = async () => {
     .then(async () => {
         // 统一发送到后端，做修改/新增
         let token = Cookies.get('token')
+        console.log('需要保存的数据为：', articleInfo)
         const res = await axios.post(
             baseUrl + '/admin/saveArticle', articleInfo,
             {
@@ -265,7 +266,7 @@ const onUploadImg = async (files) => {
 }
 
 .main-container {
-    width: 99vw;
+    width: 98vw;
 }
 
 .article-editor {

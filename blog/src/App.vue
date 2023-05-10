@@ -1,15 +1,12 @@
 <template>
     <!--指定组件的呈现位置-->
-    <router-view></router-view>
+    <!--给router-view绑定一个key，解决相同页面，不同的参数，数据不刷新的问题-->
+    <router-view :key="router.currentRoute.value.fullPath"></router-view>
 </template>
 
-<script>
+<script setup>
 
-export default {
-    name: 'App',
-    components: {
-    }
-}
+import router from "@/router";
 </script>
 
 <style>

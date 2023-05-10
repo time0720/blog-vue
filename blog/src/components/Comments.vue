@@ -13,7 +13,10 @@
         <el-container class="comments-main">
             <div id="main-blog">
                 <el-card id="main-comments">
-                    <el-card class="comments-detail" style="height: auto" v-for="comments in commentsList.value">
+                    <el-card class="comments-detail"
+                             style="height: auto;overflow: auto"
+                             v-for="comments in commentsList.value"
+                    >
                         <el-row>
                             <el-col :span="2">
                                 <el-image :src="comments.via" class="img"/>
@@ -27,12 +30,25 @@
                                 <span>{{comments.creationDate}}</span>
                                 <span style="float: right">第 {{comments.index + 1}} 条</span>
                                 <p>{{comments.content}}</p>
-                                <el-button style="float: right">回复</el-button>
-                                <el-button style="float: right"><el-icon><StarFilled/></el-icon>&nbsp;&nbsp;{{comments.upvote}}</el-button>
+                                <!--TODO:完成回复和点赞功能-->
+<!--                                <el-button style="float: right">回复</el-button>-->
+<!--                                <el-button style="float: right"><el-icon><StarFilled/></el-icon>&nbsp;&nbsp;{{comments.upvote}}</el-button>-->
                             </el-col>
                         </el-row>
                     </el-card>
                 </el-card>
+                <!--分页组件-->
+                <el-pagination
+                        background
+                        :page-sizes="[5, 10, 20]"
+                        layout="->, total, prev, pager, next, sizes"
+                        :total="commentsCount"
+                        class="blog-pagination"
+                        v-model:page-size="pageSize"
+                        v-model:current-page="currentPage"
+                        @update:page-size="handleSizeChange"
+                        @update:current-page="handleCurrentChange"
+                />
             </div>
             <div id="comments-card">
                 <AsideBar/>
@@ -70,7 +86,16 @@ import MenuBar from "@/components/MenuBar.vue";
 import AsideBar from "@/components/AsideBar.vue";
 import {onMounted, ref} from "vue";
 import {ElMessageBox} from "element-plus";
-import {commentsInfo, commentsList, fillComments, saveComments, selectComments} from "@/store"
+import {
+    commentsInfo,
+    commentsList,
+    currentPage,
+    fillComments,
+    pageSize,
+    saveComments,
+    selectComments,
+    commentsCount
+} from "@/store"
 import {Location, StarFilled} from "@element-plus/icons-vue";
 import router from "@/router";
 
@@ -79,8 +104,21 @@ const Router = router.currentRoute.value
 fillComments(Router)
 
 onMounted(() => {
-    selectComments(-1)
+    selectComments(currentPage.value, pageSize.value, -1)
 })
+
+
+//分页功能
+const handleSizeChange = (value) => {
+    pageSize.value = value
+    console.log('pageSize', pageSize.value)
+    selectComments(currentPage.value, value, -1)
+}
+const handleCurrentChange = (value) => {
+    currentPage.value = value
+    console.log('currentPage', currentPage.value)
+    selectComments(value, pageSize.value, -1)
+}
 
 let dialogVisible = ref(false)
 
@@ -123,7 +161,6 @@ if (screen.width >= 768) {
 
     #main-comments {
         width: 100%;
-        height: 70%;
     }
 
     #comments-card {
@@ -156,7 +193,6 @@ if (screen.width >= 768) {
         background-position: center center;
         background-size: cover;
         width: 100vw;
-        height: 100vh;
     }
 
     #main-blog {
@@ -168,7 +204,6 @@ if (screen.width >= 768) {
 
     #main-comments {
         width: 100%;
-        height: 50%;
     }
 
     .comments-header {
@@ -193,5 +228,11 @@ if (screen.width >= 768) {
     text-align: center;
     margin-top: 10%;
     font-size: 2rem;
+}
+
+.blog-pagination {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-right: 20vw;
 }
 </style>

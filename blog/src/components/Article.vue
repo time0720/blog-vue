@@ -6,7 +6,7 @@
                 background
                 :page-sizes="[5, 10, 20]"
                 layout="->, total, prev, pager, next, sizes"
-                :total="total"
+                :total="articleCount"
                 class="blog-pagination"
                 v-model:page-size="pageSize"
                 v-model:current-page="currentPage"
@@ -22,7 +22,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import ArticleItem from "@/components/ArticleItem.vue";
-import {total, selectArticles, articleListQuery} from "@/store"
+import {articleCount, selectArticles, articleListQuery} from "@/store"
 
 onMounted(() => {
     selectArticles()

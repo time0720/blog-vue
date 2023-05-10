@@ -67,7 +67,7 @@ queryArticleDetail(articleId).then(res => {
     }
 
     #main-blog {
-        width: 70%;
+        width: 63%;
         margin-top: 20px;
         margin-left: 10vw;
         margin-right: 8px;

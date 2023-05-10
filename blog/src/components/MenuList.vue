@@ -18,8 +18,7 @@
             <span class="menu-item"><el-icon><Document/></el-icon>起步文档</span>
         </template>
         <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10012)">已实现&未实现</el-menu-item>
-        <el-menu-item class="menu-sub-item">本站说明</el-menu-item>
-        <el-menu-item class="menu-sub-item">环境搭建</el-menu-item>
+        <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10019)">本站说明</el-menu-item>
     </el-sub-menu>
     <!--
         <el-sub-menu index="3">
@@ -47,26 +46,32 @@
                 <el-menu-item index="3-1" class="menu-sub-item">Vue3.0</el-menu-item>
             </el-menu-item-group>
         </el-sub-menu>
+        -->
         <el-sub-menu index="7">
             <template #title>
-                <span class="menu-item"><el-icon><Document/></el-icon>Linux环境</span>
+                <span class="menu-item"><el-icon><Document/></el-icon>从零开始</span>
             </template>
-            <el-menu-item index="3-1" class="menu-sub-item">Linux配置JDK</el-menu-item>
-            <el-menu-item index="3-1" class="menu-sub-item">Linux配置Tomcat</el-menu-item>
-            <el-menu-item index="3-1" class="menu-sub-item">Linux配置MySQL</el-menu-item>
-            <el-menu-item index="3-1" class="menu-sub-item">Linux配置Maven</el-menu-item>
-            <el-menu-item index="3-1" class="menu-sub-item">Linux配置RocketMQ</el-menu-item>
-            <el-menu-item index="3-1" class="menu-sub-item">Linux配置Nginx</el-menu-item>
-            <el-menu-item index="3-1" class="menu-sub-item">Linux配置Redis</el-menu-item>
+            <el-menu-item-group title="Linux环境搭建">
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10020)">Linux环境搭建说明</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10021)">Linux配置JDK</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10023)">Linux配置Tomcat</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10024)">Linux配置MySQL</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10025)">Linux配置Maven</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10026)">Linux配置RocketMQ</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10027)">Linux配置Nginx</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10028)">Linux配置Redis</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="从0开始搭建">
+                <el-menu-item class="menu-sub-item">计划中～</el-menu-item>
+            </el-menu-item-group>
         </el-sub-menu>
-        -->
-    <el-sub-menu index="4">
-        <template #title>
-            <span class="menu-item"><el-icon><View/></el-icon>休闲</span>
-        </template>
-        <el-menu-item index="4-1" class="menu-sub-item"><el-icon><Picture/></el-icon>照片</el-menu-item>
-        <el-menu-item index="4-2" class="menu-sub-item"><el-icon><VideoPlay/></el-icon>音频</el-menu-item>
-    </el-sub-menu>
+<!--    <el-sub-menu index="4">-->
+<!--        <template #title>-->
+<!--            <span class="menu-item"><el-icon><View/></el-icon>休闲</span>-->
+<!--        </template>-->
+<!--        <el-menu-item index="4-1" class="menu-sub-item"><el-icon><Picture/></el-icon>照片</el-menu-item>-->
+<!--        <el-menu-item index="4-2" class="menu-sub-item"><el-icon><VideoPlay/></el-icon>音频</el-menu-item>-->
+<!--    </el-sub-menu>-->
     <el-menu-item index="/comments" class="menu-item"><el-icon><ChatLineRound/></el-icon>评论区</el-menu-item>
 </template>
 

@@ -1,4 +1,4 @@
-import {reactive, ref} from "vue";
+import {inject, nextTick, reactive, ref, watch} from "vue";
 import router from "@/router/index"
 import axios from "axios";
 import {Map} from "core-js/internals/map-helpers";
@@ -30,7 +30,7 @@ export const articleListQuery = reactive({
 })
 
 //分页查询的所有article
-export const total = ref(0)
+export const articleCount = ref(0)
 export const selectArticles = () => {
     axios.get(
         baseUrl + '/article/selectArticle', {
@@ -42,7 +42,7 @@ export const selectArticles = () => {
             articleList.value.forEach((article, index) => {
                 article.index = index
             })
-            total.value = response.data.data.total
+            articleCount.value = response.data.data.total
         }
     )
 }
@@ -103,21 +103,38 @@ export const commentsList = reactive({
         index: null
     }]
 })
-export const selectComments = (articleId) => {
+export let pageSize = ref(5)
+export let currentPage = ref(1)
+export let commentsCount = ref(0)
+export const selectComments = (pageNum, pageSize, articleId) => {
     axios.get(
         baseUrl + '/comments/selectComments', {
             params: {
-                pageNum: 1,
-                pageSize: 10,
+                pageNum,
+                pageSize,
                 articleId
             }
         }
     ).then(
         response => {
+            commentsCount.value = response.data.data.total
+            console.log(commentsCount.value)
+            //总页数
+            let pageCount = Math.floor(commentsCount.value / pageSize) + 1
+            //最后一页缺少的个数，不足一页的数量
+            let lackCount = pageSize - commentsCount.value % pageSize
+            console.log(pageCount)
             commentsList.value = response.data.data.list
             let list = commentsList.value.reverse()
             list.forEach((comments, index) => {
-                comments.index = index
+                let sub = index + (pageCount - currentPage.value) * pageSize
+                //当是最后一页时
+                if (currentPage.value === pageCount) {
+                    comments.index = sub
+                } else {
+                    comments.index = sub - lackCount
+                }
+
             })
             commentsList.value = list.reverse()
         }
@@ -145,7 +162,6 @@ export const fillComments = (Router) => {
     }
 }
 export const saveComments = async () => {
-    console.log(commentsInfo)
      const res = await axios.post(
         baseUrl + '/comments/addComments', commentsInfo,
         {
@@ -154,7 +170,6 @@ export const saveComments = async () => {
             }
         }
     )
-    console.log(res)
     //跳转回去
     if (res.data.status === 200) {
         ElMessage({
