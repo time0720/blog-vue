@@ -11,7 +11,7 @@
         <el-menu-item/>
         <el-menu-item index="/" class="menu-item"><el-icon><Avatar/></el-icon>时光</el-menu-item>
         <div class="flex-grow"/>
-        <el-menu-item index="#" class="menu-item" @click="dialogVisible = true">
+        <el-menu-item class="menu-item" @click="dialogVisible = true">
             <el-icon><Search/></el-icon>搜索
         </el-menu-item>
         <MenuList/>
@@ -44,7 +44,7 @@
         <el-menu-item/>
         <el-menu-item index="/" class="menu-item"><el-icon><Avatar/></el-icon>时光</el-menu-item>
         <div class="flex-grow"/>
-        <el-menu-item index="#" class="menu-item" @click="dialogVisible = true">
+        <el-menu-item class="menu-item" @click="dialogVisible = true">
             <el-icon><Search/></el-icon>搜索
         </el-menu-item>
         <el-menu-item class="menu-item" @click="drawer = true">

@@ -197,9 +197,6 @@ if (screen.width >= 768) {
 
     #main-blog {
         width: 100vw;
-        margin-top: 2rem;
-        margin-left: 5vw;
-        margin-right: 5vw;
     }
 
     #main-comments {
