@@ -23,6 +23,11 @@ const routes = [
         path: '/editor',
         name: 'editor',
         component: () => import('../components/ArticleEditor.vue')
+    },
+    {
+        path: '/comments',
+        name: 'comments',
+        component: () => import('../components/Comments.vue')
     }
 ];
 const router = createRouter({

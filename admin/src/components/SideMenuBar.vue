@@ -16,17 +16,20 @@
                 <el-menu-item index="/article">文章列表</el-menu-item>
                 <el-menu-item index="/editor">新增文章</el-menu-item>
             </el-sub-menu>
+            <el-menu-item index="/comments">
+                <el-icon><ChatDotSquare/></el-icon>评论
+            </el-menu-item>
         </el-menu>
     </div>
 </template>
 
 <script>
-import {Location, Document, Setting, Menu} from "@element-plus/icons-vue";
+import {Location, Document, Setting, Menu, ChatDotSquare} from "@element-plus/icons-vue";
 import {ref} from "vue";
 
 export default {
     name: "SideMenuBar",
-    components: {Menu, Setting, Document, Location},
+    components: {ChatDotSquare, Menu, Setting, Document, Location},
     setup() {
 
     }

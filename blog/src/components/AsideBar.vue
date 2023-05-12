@@ -7,12 +7,13 @@
             </div>
             <h1 class="avatar-name">时光</h1>
             <br>
-            <h1><el-icon><Phone/></el-icon> ：15971080935</h1>
+            <h1><el-icon><ChatRound/></el-icon> ：QQ: 8074905</h1>
             <h1><el-icon><Message/></el-icon> ：8074905@qq.com</h1>
         </el-card>
         <!--网站运行时长信息-->
         <el-card class="card-item">
-            正在开发中~
+            <el-row class="info-row">本站已运行：</el-row>
+            <el-row class="info-row"><el-icon><Timer/></el-icon>{{runningInfo}}</el-row>
             <!--
                 1.文章数量
                 2.运行天数
@@ -25,8 +26,27 @@
 </template>
 
 <script setup>
-import {Message, Phone} from "@element-plus/icons-vue";
+import {ChatRound, Document, Message, Timer} from "@element-plus/icons-vue";
+import {onMounted, ref} from "vue";
+import {articleCount, commentsCount} from "@/store";
 
+let runningInfo = ref(0)
+onMounted(() => {
+    setInterval(() => {
+        runningInfo.value = runningChange()
+    }, 1000)
+})
+
+const runningChange = () => {
+    let startTime = new Date('2023-05-08 00:00:00').getTime()
+    let currentTime = new Date().getTime()
+    let runningTime = currentTime - startTime
+    let day = Math.floor((runningTime) / (86400000)); //天
+    let hours = Math.floor((runningTime % 86400000) / 3600000); //时
+    let minutes = Math.floor((runningTime % 3600000) / 60000); //分
+    let seconds = Math.floor((runningTime % 60000) / 1000); //秒
+    return day + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 "
+}
 </script>
 
 <style scoped>
@@ -44,7 +64,6 @@ import {Message, Phone} from "@element-plus/icons-vue";
 .card-item {
     height: 45vh;
     margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 .avatar-img {
@@ -56,5 +75,9 @@ import {Message, Phone} from "@element-plus/icons-vue";
 
 .avatar-name {
     text-align: center;
+}
+
+.info-row {
+    margin-bottom: 2vh;
 }
 </style>

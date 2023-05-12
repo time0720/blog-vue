@@ -8,20 +8,31 @@
                 <h1>{{article.articleTitle}}</h1>
             </div>
         </div>
-        <el-container class="category-main">
-            <div id="main-blog">
-                <!--TODO: 目录的获取与展示-->
-                <el-card>
-                    <MdEditor
-                            v-model="article.articleContent"
-                            :preview-only="true"
-                    >
-                    </MdEditor>
-                </el-card>
-            </div>
-            <div id="category-card">
-                <AsideBar/>
-            </div>
+        <el-container direction="vertical" class="category-main">
+            <el-container>
+                <div id="main-blog">
+                    <!--TODO: 目录的获取与展示-->
+                    <el-card>
+                        <MdEditor
+                                v-model="article.articleContent"
+                                :preview-only="true"
+                        >
+                        </MdEditor>
+                    </el-card>
+                </div>
+                <div id="category-card">
+                    <AsideBar/>
+                </div>
+            </el-container>
+            <!--评论区-->
+            <el-container class="comments-place" direction="vertical">
+                <div>
+                    <el-card class="add-comments">
+                        <CommentsBtn/>
+                    </el-card>
+                </div>
+                <CommentsContent/>
+            </el-container>
         </el-container>
     </el-container>
 </template>
@@ -31,14 +42,11 @@ import MenuBar from "@/components/MenuBar.vue";
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import AsideBar from "@/components/AsideBar.vue";
-import {commentsInfo, fillComments, queryArticleDetail} from "@/store"
+import {fillComments, queryArticleDetail, selectComments} from "@/store"
 import router from "@/router/index"
-import {reactive} from "vue";
-
-//根据路由来设置评论字段
-const Router = router.currentRoute.value
-fillComments(Router)
-console.log(commentsInfo)
+import {reactive,} from "vue";
+import CommentsBtn from "@/components/CommentsBtn.vue";
+import CommentsContent from "@/components/CommentsContent.vue";
 
 let article = reactive({
     articleTitle: '',
@@ -52,6 +60,11 @@ queryArticleDetail(articleId).then(res => {
     article.articleContent = articleInfo.articleContent
 })
 
+//根据路由来设置评论字段
+const Router = router.currentRoute.value
+fillComments(Router)
+
+selectComments(1, 10000 ,articleId)
 </script>
 
 <style scoped>
@@ -104,7 +117,7 @@ queryArticleDetail(articleId).then(res => {
     background-image: url("https://time7.top:9000/blog/whiteblue.jpg");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 100% 100%;
+    background-size: cover;
 }
 
 .archives-bg {
@@ -113,4 +126,12 @@ queryArticleDetail(articleId).then(res => {
     margin-top: 10%;
     font-size: 1.5rem;
 }
+
+
+.add-comments {
+    width: 61vw;
+    height: 10vh;
+    margin: 5vh 10vw 5vh 10vw;
+}
+
 </style>

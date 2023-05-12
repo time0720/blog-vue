@@ -118,12 +118,10 @@ export const selectComments = (pageNum, pageSize, articleId) => {
     ).then(
         response => {
             commentsCount.value = response.data.data.total
-            console.log(commentsCount.value)
             //总页数
             let pageCount = Math.floor(commentsCount.value / pageSize) + 1
             //最后一页缺少的个数，不足一页的数量
             let lackCount = pageSize - commentsCount.value % pageSize
-            console.log(pageCount)
             commentsList.value = response.data.data.list
             let list = commentsList.value.reverse()
             list.forEach((comments, index) => {
