@@ -87,13 +87,16 @@ const baseUrl = inject('baseUrl')
 const editFlag = history.state.hasOwnProperty('article')
 
 // 初始化文章
-let articleId, content, title, picture, categoryName, article
+let articleId, content, title, picture, categoryName, article, userId, deleteFlag, creationDate
 if (!editFlag) {
     content = ref('')
     title = ref('')
     articleId = ref(null)
     picture = ref('')
     categoryName = ref('')
+    userId = ref('')
+    deleteFlag = ref('')
+    creationDate = ref('')
 } else {
     article = history.state.article
     articleId = ref(article.articleId)
@@ -101,15 +104,21 @@ if (!editFlag) {
     title = ref(article.articleTitle)
     picture = ref(article.articlePicture)
     categoryName = ref(article.categoryName)
+    userId = ref(article.userId)
+    deleteFlag = ref(article.deleteFlag)
+    creationDate = ref(article.creationDate)
 }
 
 //保存
 let articleInfo = reactive({
-    articleId: articleId,
+    articleId: articleId.value,
     articleTitle: title.value,
     articleContent: content.value,
     articlePicture: picture.value,
-    categoryName: categoryName.value
+    categoryName: categoryName.value,
+    userId: userId.value,
+    deleteFlag: deleteFlag.value,
+    creationDate: creationDate.value
 })
 
 //上传文件功能

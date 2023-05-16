@@ -16,20 +16,51 @@
         </el-menu-item>
         <MenuList/>
     </el-menu>
+    
+    <!--弹出的搜索框-->
     <el-dialog
         v-model="dialogVisible"
         title="搜索标题"
         width="30%"
+        @keyup.enter="searchKeyWord(keyWord);
+                        dialogVisible = false;
+                        searchVisible = true"
     >
         <el-input v-model="keyWord"/>
         <template #footer>
               <span class="dialog-footer">
                 <el-button @click="dialogVisible = false">取消</el-button>
-                <el-button type="primary" @click="searchKeyWord">
+                <el-button type="primary"
+                           @click="searchKeyWord(keyWord);
+                                    dialogVisible = false;
+                                    searchVisible = true">
                   确认
                 </el-button>
               </span>
         </template>
+    </el-dialog>
+
+    <!--ES搜索结果框-->
+    <!--TODO:移动端的搜索框-->
+    <el-dialog
+            v-model="searchVisible"
+            title="搜索的结果为："
+            width="50%"
+    >
+        <el-table
+                :data="searchArticleList.value"
+                border
+                style="width: 100%"
+        >
+            <el-table-column prop="articleTitle" label="文章标题"/>
+            <el-table-column prop="categoryName" label="文章类型"/>
+            <el-table-column prop="creationDate" label="创建日期"/>
+            <el-table-column label="操作" fixed="right">
+                <template #default="scope">
+                    <el-button @click="queryArticleDetail(scope.row.articleId)">详情</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
     </el-dialog>
 
     <!--移动端菜单-->
@@ -52,7 +83,8 @@
         </el-menu-item>
     </el-menu>
 
-    <el-drawer v-model="drawer" title="I am the title" :with-header="false" size="60%">
+    <!--移动端的菜单抽屉-->
+    <el-drawer v-model="drawer" title="菜单" :with-header="true" size="60%">
         <el-menu
             :router="true"
         >
@@ -69,14 +101,12 @@ import {
 } from "@element-plus/icons-vue";
 import {ref} from "vue";
 import MenuList from "@/components/MenuList.vue";
+import {queryArticleDetail, searchArticleList, searchKeyWord} from "@/store";
 
 //搜索框
 const dialogVisible = ref(false)
+const searchVisible = ref(false)
 const keyWord = ref('')
-const searchKeyWord = () => {
-    console.log(keyWord.value)
-}
-
 const drawer = ref(false)
 
 </script>

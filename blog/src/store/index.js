@@ -1,4 +1,4 @@
-import {inject, nextTick, reactive, ref, watch} from "vue";
+import {reactive, ref} from "vue";
 import router from "@/router/index"
 import axios from "axios";
 import {Map} from "core-js/internals/map-helpers";
@@ -7,7 +7,7 @@ import {ElMessage} from "element-plus";
 export const baseUrl = 'https://time7.top:8000'
 
 //文章列表对象
-export const articleList = reactive({
+export let articleList = reactive({
     value: [{
         articleId: 0,
         categoryId: 0,
@@ -183,4 +183,22 @@ export const saveComments = async () => {
     setTimeout(() => {
         location.reload()
     }, 1000)
+}
+
+//ES全局搜索功能：根据文章标题和内容搜索
+export let searchArticleList = reactive([])
+export const searchKeyWord = (keyword) => {
+    console.log(keyword)
+    if (keyword === null || keyword === undefined || keyword === '') {
+        ElMessage.error('请输入搜索的内容！')
+    } else {
+        axios.get(
+            baseUrl + '/article/findByEs?keyword=' + keyword
+        ).then(
+            response => {
+                searchArticleList.value = response.data.data
+                console.log(searchArticleList.value)
+            }
+        )
+    }
 }
