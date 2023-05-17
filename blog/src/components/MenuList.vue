@@ -60,6 +60,7 @@
                 <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10026)">Linux配置RocketMQ</el-menu-item>
                 <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10027)">Linux配置Nginx</el-menu-item>
                 <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10028)">Linux配置Redis</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10032)">Linux配置Elasticsearch</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="从0开始搭建">
                 <el-menu-item class="menu-sub-item">计划中～</el-menu-item>
