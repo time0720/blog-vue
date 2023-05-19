@@ -2,8 +2,14 @@
     <!--后台首页-->
     <el-container direction="vertical" class="base-container">
         <div class="header-blog">
-            <h1 class="title-blog">blog后台标题栏</h1>
-            <el-button type="danger" @click="logoutForm">注销</el-button>
+            <el-row class="title-blog">
+                <el-col :span="20">
+                    <h1>blog后台管理菜单</h1>
+                </el-col>
+                <el-col :span="4">
+                    <el-button class="title-btn" type="danger" @click="logoutForm">注销</el-button>
+                </el-col>
+            </el-row>
         </div>
         <el-container class="main-container">
             <div>
@@ -44,7 +50,7 @@ const logoutForm = () => {
 
 <style scoped>
 .title-blog {
-    text-align: center;
+    background-color: skyblue;
 }
 
 .base-container {
@@ -58,7 +64,7 @@ const logoutForm = () => {
 
 .header-blog {
     width: 100vw;
-    height: 20vh;
+    text-align: center;
 }
 
 .main-blog {
@@ -68,5 +74,10 @@ const logoutForm = () => {
     background-size: cover;
     margin-left: 2vw;
     width: 80vw;
+}
+
+.title-btn {
+    top: 25%;
+    position: absolute;
 }
 </style>

@@ -2,7 +2,7 @@
     <!--后台首页-->
     <el-container direction="vertical" class="base-container">
         <div class="header-blog">
-            <h1 class="title-blog">blog后台标题栏</h1>
+            <h1 class="title-blog">blog后台评论管理</h1>
         </div>
         <el-container class="main-container">
             <div>

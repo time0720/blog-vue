@@ -45,7 +45,7 @@
     <el-dialog
             v-model="searchVisible"
             title="搜索的结果为："
-            width="50%"
+            width="60%"
     >
         <el-table
                 :data="searchArticleList.value"

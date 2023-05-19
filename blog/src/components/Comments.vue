@@ -4,7 +4,9 @@
             <!--菜单栏nav-->
             <nav><MenuBar/></nav>
             <!--背景图片和字体-->
-            <CommentsBtn/>
+            <div class="comments-bg">
+                <CommentsBtn/>
+            </div>
         </div>
         <el-container class="comments-main">
             <CommentsContent/>
@@ -19,7 +21,7 @@
 
 import MenuBar from "@/components/MenuBar.vue";
 import AsideBar from "@/components/AsideBar.vue";
-import {onMounted, ref} from "vue";
+import {onMounted} from "vue";
 import {
     currentPage,
     fillComments,
@@ -81,12 +83,6 @@ onMounted(() => {
         background-size: cover;
         width: 100vw;
         height: 30vh;
-    }
-
-    .comments-text {
-        margin-top: 10px;
-        height: 30vh;
-        width: 100%;
     }
 
 }

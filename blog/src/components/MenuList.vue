@@ -13,6 +13,14 @@
             <el-icon><FolderOpened/></el-icon>分类
         </el-menu-item>
     </el-sub-menu>
+    <el-sub-menu index="/own-world">
+        <template #title>
+            <span class="menu-item"><el-icon><Document/></el-icon>小天地</span>
+        </template>
+        <el-menu-item index="/lucky-wheel" class="menu-sub-item">
+            <el-icon><Food/></el-icon>吃什么？
+        </el-menu-item>
+    </el-sub-menu>
     <el-sub-menu index="/instruction">
         <template #title>
             <span class="menu-item"><el-icon><Document/></el-icon>起步文档</span>
@@ -53,14 +61,14 @@
             </template>
             <el-menu-item-group title="Linux环境搭建">
                 <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10020)">Linux环境搭建说明</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10021)">Linux配置JDK</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10023)">Linux配置Tomcat</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10024)">Linux配置MySQL</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10025)">Linux配置Maven</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10026)">Linux配置RocketMQ</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10027)">Linux配置Nginx</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10028)">Linux配置Redis</el-menu-item>
-                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10032)">Linux配置Elasticsearch</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10021)">Linux安装JDK</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10023)">Linux安装Tomcat</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10024)">Linux安装MySQL</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10025)">Linux安装Maven</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10026)">Linux安装RocketMQ</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10027)">Linux安装Nginx</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10028)">Linux安装Redis</el-menu-item>
+                <el-menu-item class="menu-sub-item" @click="queryArticleDetail(10032)">Linux安装Elasticsearch</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="从0开始搭建">
                 <el-menu-item class="menu-sub-item">计划中～</el-menu-item>
@@ -82,7 +90,7 @@ import {
     Collection, Comment,
     Compass,
     Document,
-    FolderOpened,
+    FolderOpened, Food,
     House,
     VideoPlay,
     View
@@ -92,7 +100,7 @@ import {queryArticleDetail} from "@/store";
 export default {
     name: "MenuList",
     methods: {queryArticleDetail},
-    components: {Comment, Document, FolderOpened, Collection, VideoPlay, View, ChatLineRound, House, Compass}
+    components: {Food, Comment, Document, FolderOpened, Collection, VideoPlay, View, ChatLineRound, House, Compass}
 }
 </script>
 
