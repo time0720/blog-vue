@@ -1,8 +1,9 @@
 <template>
     <div class="article-menu-bar">
-        <h1>管理菜单</h1>
+<!--        <h1>管理菜单</h1>-->
         <el-menu
             :router="true"
+            background-color="#AFEEEE"
         >
             <el-menu-item index="/index">
                 <el-icon><setting/></el-icon>
@@ -23,27 +24,17 @@
     </div>
 </template>
 
-<script>
-import {Location, Document, Setting, Menu, ChatDotSquare} from "@element-plus/icons-vue";
-import {ref} from "vue";
+<script setup>
+import {Location, Setting, ChatDotSquare} from "@element-plus/icons-vue";
 
-export default {
-    name: "SideMenuBar",
-    components: {ChatDotSquare, Menu, Setting, Document, Location},
-    setup() {
-
-    }
-}
 </script>
 
 <style scoped>
 .article-menu-bar {
-    margin-left: 2vw;
-    width: 8vw;
 }
 
 .article-menu-bar:not(.el-menu--collapse) {
-    width: 10vw;
-    min-height: 10vh;
+    width: 15vw;
+    min-height: 15vh;
 }
 </style>

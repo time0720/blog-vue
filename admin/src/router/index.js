@@ -38,12 +38,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(to)
     if (to.path === '/login') {
         next()
     } else {
         const token = Cookies.get('token');
-        console.log('currentToken', token)
         //token不存在
         if (token === null || token === '' || token === undefined) {
             ElMessage.error('快去登录！！！')

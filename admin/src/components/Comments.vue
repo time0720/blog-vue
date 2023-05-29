@@ -1,9 +1,7 @@
 <template>
     <!--后台首页-->
     <el-container direction="vertical" class="base-container">
-        <div class="header-blog">
-            <h1 class="title-blog">blog后台评论管理</h1>
-        </div>
+        <HeaderBar/>
         <el-container class="main-container">
             <div>
                 <SideMenuBar/>
@@ -51,6 +49,7 @@ import {inject, onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {ElMessage, ElMessageBox} from "element-plus";
 import Cookies from "js-cookie";
+import HeaderBar from "@/components/HeaderBar.vue";
 
 const baseUrl = inject('baseUrl')
 const commentsList = reactive({
@@ -154,9 +153,6 @@ const handleCurrentChange = (value) => {
 </script>
 
 <style scoped>
-.title-blog {
-    text-align: center;
-}
 
 .base-container {
     background-image: url("https://time7.top:9000/blog/back_index.jpg");
@@ -167,14 +163,9 @@ const handleCurrentChange = (value) => {
     min-height: 100vh;
 }
 
-.header-blog {
-    width: 100vw;
-    height: 20vh;
-}
 
 .main-blog {
-    margin-left: 2vw;
-    width: 80vw;
+    width: 85vw;
 }
 
 .comments-pagination {

@@ -263,8 +263,7 @@ const handleCurrentChange = (value) => {
 
 .article-container {
     margin-top: 5vh;
-    margin-left: 2vw;
-    width: 88vw;
+    width: 85vw;
 }
 
 .article-query {

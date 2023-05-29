@@ -1,18 +1,9 @@
 <template>
     <!--后台首页-->
     <el-container direction="vertical" class="base-container">
-        <div class="header-blog">
-            <el-row class="title-blog">
-                <el-col :span="20">
-                    <h1>blog后台管理菜单</h1>
-                </el-col>
-                <el-col :span="4">
-                    <el-button class="title-btn" type="danger" @click="logoutForm">注销</el-button>
-                </el-col>
-            </el-row>
-        </div>
+        <HeaderBar/>
         <el-container class="main-container">
-            <div>
+            <div class="menu-blog">
                 <SideMenuBar/>
             </div>
             <div class="main-blog">
@@ -26,6 +17,7 @@ import SideMenuBar from "@/components/SideMenuBar.vue";
 import Cookies from "js-cookie";
 import axios from "axios";
 import {inject} from "vue";
+import HeaderBar from "@/components/HeaderBar.vue";
 
 const baseUrl = inject('baseUrl')
 
@@ -49,9 +41,7 @@ const logoutForm = () => {
 </script>
 
 <style scoped>
-.title-blog {
-    background-color: skyblue;
-}
+
 
 .base-container {
     background-image: url("https://time7.top:9000/blog/back_index.jpg");
@@ -62,9 +52,10 @@ const logoutForm = () => {
     min-height: 100vh;
 }
 
-.header-blog {
-    width: 100vw;
-    text-align: center;
+
+
+.menu-blog {
+    width: 15vw;
 }
 
 .main-blog {
@@ -72,12 +63,7 @@ const logoutForm = () => {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    margin-left: 2vw;
-    width: 80vw;
+    width: 85vw;
 }
 
-.title-btn {
-    top: 25%;
-    position: absolute;
-}
 </style>
