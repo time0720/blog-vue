@@ -202,3 +202,67 @@ export const searchKeyWord = (keyword) => {
         )
     }
 }
+
+//IP定位，如没有IP，则取HTTP之中的请求来进行定位
+let addressInfo = reactive({
+    status: null,
+    info: null,
+    infocode: null,
+    province: null,
+    city: null,
+    adcode: null,
+    rectangle: null
+})
+export const getCurrentAddress = async () => {
+    await axios.get(
+        'https://restapi.amap.com/v3/ip?key=a7a27bc3f08d0b30372d69b98f973b72'
+    ).then(
+        response => {
+            addressInfo.value = response.data
+        }
+    )
+}
+
+//获取本地天气信息
+export let weatherCurrentInfo = reactive({
+    status: null,
+    count: null,
+    info: null,
+    infocode: null,
+    lives: []
+})
+export let weatherForecastInfo = reactive({
+    status: null,
+    count: null,
+    info: null,
+    infocode: null,
+    forecasts: [
+        {
+            city: null,
+            adcode: null,
+            province: null,
+            reporttime: null,
+            casts: []
+        }
+    ]
+})
+export const getWeather = async () => {
+    //1.先获取地址
+    await getCurrentAddress()
+    //2.获取实时天气(今天的)
+    await axios.get(
+        'https://restapi.amap.com/v3/weather/weatherInfo?key=dcae5349311800610d7d0975ccc9bcf9&extensions=base&city=' + addressInfo.value.adcode
+    ).then(
+        response => {
+            weatherCurrentInfo.value = response.data
+        }
+    )
+    //3.获取未来三天的天气
+    await axios.get(
+        'https://restapi.amap.com/v3/weather/weatherInfo?key=dcae5349311800610d7d0975ccc9bcf9&extensions=all&city=' + addressInfo.value.adcode
+    ).then(
+        response => {
+            weatherForecastInfo.value = response.data
+        }
+    )
+}

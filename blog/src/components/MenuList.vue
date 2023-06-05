@@ -20,6 +20,9 @@
         <el-menu-item index="/lucky-wheel" class="menu-sub-item">
             <el-icon><Food/></el-icon>吃什么？
         </el-menu-item>
+        <el-menu-item index="/today" class="menu-sub-item">
+            <el-icon><Sunrise/></el-icon>今日情况
+        </el-menu-item>
     </el-sub-menu>
     <el-sub-menu index="/instruction">
         <template #title>
@@ -91,7 +94,7 @@ import {
     Compass,
     Document,
     FolderOpened, Food,
-    House,
+    House, Sunrise,
     VideoPlay,
     View
 } from "@element-plus/icons-vue";
@@ -100,7 +103,9 @@ import {queryArticleDetail} from "@/store";
 export default {
     name: "MenuList",
     methods: {queryArticleDetail},
-    components: {Food, Comment, Document, FolderOpened, Collection, VideoPlay, View, ChatLineRound, House, Compass}
+    components: {
+        Sunrise,
+        Food, Comment, Document, FolderOpened, Collection, VideoPlay, View, ChatLineRound, House, Compass}
 }
 </script>
 

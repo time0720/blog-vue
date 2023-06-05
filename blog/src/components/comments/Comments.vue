@@ -29,8 +29,8 @@ import {
     selectComments,
 } from "@/store"
 import router from "@/router";
-import CommentsBtn from "@/components/CommentsBtn.vue";
-import CommentsContent from "@/components/CommentsContent.vue";
+import CommentsBtn from "@/components/comments/CommentsBtn.vue";
+import CommentsContent from "@/components/comments/CommentsContent.vue";
 
 //根据路由来设置评论字段
 const Router = router.currentRoute.value

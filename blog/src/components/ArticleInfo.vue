@@ -45,8 +45,8 @@ import AsideBar from "@/components/AsideBar.vue";
 import {fillComments, queryArticleDetail, selectComments} from "@/store"
 import router from "@/router/index"
 import {reactive,} from "vue";
-import CommentsBtn from "@/components/CommentsBtn.vue";
-import CommentsContent from "@/components/CommentsContent.vue";
+import CommentsBtn from "@/components/comments/CommentsBtn.vue";
+import CommentsContent from "@/components/comments/CommentsContent.vue";
 
 let article = reactive({
     articleTitle: '',

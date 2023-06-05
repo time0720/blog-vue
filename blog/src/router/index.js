@@ -25,12 +25,17 @@ const routes = [
     {
         path: '/comments',
         name: 'comments',
-        component: () => import('../components/Comments.vue')
+        component: () => import('../components/comments/Comments.vue')
     },
     {
         path: '/lucky-wheel',
         name: 'lucky-wheel',
         component: () => import('../components/LuckyWheel.vue')
+    },
+    {
+        path: '/today',
+        name: 'today',
+        component: () => import('../components/today/Today.vue')
     }
 ];
 const router = createRouter({
