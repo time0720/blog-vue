@@ -2,6 +2,7 @@
     <!--指定组件的呈现位置-->
     <!--给router-view绑定一个key，解决相同页面，不同的参数，数据不刷新的问题-->
     <router-view :key="router.currentRoute.value.fullPath"></router-view>
+    <el-backtop :right="100" :bottom="100"/>
 </template>
 
 <script setup>

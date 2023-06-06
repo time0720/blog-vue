@@ -23,6 +23,9 @@
         <el-menu-item index="/today" class="menu-sub-item">
             <el-icon><Sunrise/></el-icon>今日情况
         </el-menu-item>
+        <el-menu-item index="/timeline" class="menu-sub-item">
+            <el-icon><Timer/></el-icon>时间线
+        </el-menu-item>
     </el-sub-menu>
     <el-sub-menu index="/instruction">
         <template #title>
@@ -94,7 +97,7 @@ import {
     Compass,
     Document,
     FolderOpened, Food,
-    House, Sunrise,
+    House, Sunrise, Timer,
     VideoPlay,
     View
 } from "@element-plus/icons-vue";
@@ -104,6 +107,7 @@ export default {
     name: "MenuList",
     methods: {queryArticleDetail},
     components: {
+        Timer,
         Sunrise,
         Food, Comment, Document, FolderOpened, Collection, VideoPlay, View, ChatLineRound, House, Compass}
 }
