@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/menu/MenuBar.vue";
 
 </script>
 

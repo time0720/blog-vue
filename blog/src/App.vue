@@ -38,4 +38,12 @@ html, body {
     margin-left: -1.5rem!important;
 }
 
+.el-dialog {
+    border-radius: 20px!important;
+}
+.el-dialog__body {
+    border-radius: 20px!important;
+}
+
+
 </style>

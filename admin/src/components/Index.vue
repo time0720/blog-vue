@@ -14,30 +14,8 @@
 
 <script setup>
 import SideMenuBar from "@/components/SideMenuBar.vue";
-import Cookies from "js-cookie";
-import axios from "axios";
-import {inject} from "vue";
 import HeaderBar from "@/components/HeaderBar.vue";
 
-const baseUrl = inject('baseUrl')
-
-const config = {
-    headers: {'token': Cookies.get('token')}
-}
-const logoutForm = () => {
-    if (confirm('确定要注销当前用户吗？')) {
-        //删除token
-        Cookies.remove('token')
-        axios.get(
-            baseUrl + '/oauth/logout', config
-        ).then(
-            response => {
-                console.log('注销成功!', response.data)
-            }
-        )
-        window.location.reload()
-    }
-}
 </script>
 
 <style scoped>

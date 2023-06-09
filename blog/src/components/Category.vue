@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/menu/MenuBar.vue";
 import AsideBar from "@/components/AsideBar.vue";
 import * as echarts from 'echarts';
 import {onMounted, ref} from "vue";

@@ -64,7 +64,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import AsideBar from "@/components/AsideBar.vue";
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/menu/MenuBar.vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import Canvas from "@/components/Canvas.vue";
 const myLucky = ref()

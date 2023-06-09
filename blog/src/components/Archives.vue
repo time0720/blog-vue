@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/menu/MenuBar.vue";
 import AsideBar from "@/components/AsideBar.vue";
 import {Calendar} from "@element-plus/icons-vue";
 import {articleList, articleMap, queryArticleDetail} from "@/store"

@@ -16,7 +16,7 @@
 </template>
 
 <script setup >
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/menu/MenuBar.vue";
 import {Sunrise} from "@element-plus/icons-vue";
 import Weather from "@/components/today/Weather.vue";
 

@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import {commentsCount, commentsInfo, commentsList, currentPage, pageSize, selectComments} from "@/store";
+import {commentsCount, commentsList, currentPage, pageSize, selectComments} from "@/store";
 import {Location} from "@element-plus/icons-vue";
 import router from "@/router";
 

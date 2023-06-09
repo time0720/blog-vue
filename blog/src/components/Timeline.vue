@@ -29,9 +29,16 @@
 
 <script setup>
 import {MoreFilled, SuccessFilled} from '@element-plus/icons-vue'
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/menu/MenuBar.vue";
 
 const activities = [
+    {
+        content: '新增登录注册、个人中心等等功能。',
+        timestamp: '2023-06-09',
+        size: 'large',
+        icon: SuccessFilled,
+        color: '#0bbd87'
+    },
     {
         content: '添加了时间线，对，就是这个页面',
         timestamp: '2023-06-06',

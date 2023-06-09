@@ -19,25 +19,35 @@
 
 <script setup>
 
-import MenuBar from "@/components/MenuBar.vue";
+import MenuBar from "@/components/menu/MenuBar.vue";
 import AsideBar from "@/components/AsideBar.vue";
 import {onMounted} from "vue";
 import {
+    commentsInfo,
     currentPage,
-    fillComments,
+    fillComments, getUserInfo,
     pageSize,
-    selectComments,
+    selectComments, userDetailsDTO,
 } from "@/store"
 import router from "@/router";
 import CommentsBtn from "@/components/comments/CommentsBtn.vue";
 import CommentsContent from "@/components/comments/CommentsContent.vue";
 
-//根据路由来设置评论字段
-const Router = router.currentRoute.value
-fillComments(Router)
-
-onMounted(() => {
-    selectComments(currentPage.value, pageSize.value, -1)
+onMounted(async () => {
+    await selectComments(currentPage.value, pageSize.value, -1)
+    //根据路由来设置评论字段
+    const Router = router.currentRoute.value
+    fillComments(Router)
+    await getUserInfo()
+    if (userDetailsDTO.value !== undefined) {
+        let userInfo = userDetailsDTO.value.user
+        commentsInfo.via = userInfo.avatar
+        if (userInfo.nickName === undefined || userInfo.nickName === '' || userInfo.nickName === null) {
+            commentsInfo.commentsName = userInfo.userName
+        } else {
+            commentsInfo.commentsName = userInfo.nickName
+        }
+    }
 })
 
 </script>

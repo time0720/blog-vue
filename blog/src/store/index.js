@@ -1,10 +1,54 @@
 import {reactive, ref} from "vue";
 import router from "@/router/index"
 import axios from "axios";
+import Cookies from 'js-cookie'
 import {Map} from "core-js/internals/map-helpers";
 import {ElMessage} from "element-plus";
 
 export const baseUrl = 'https://time7.top:8000'
+
+//判断当前是否登录
+export let userInfoVisible
+let token = Cookies.get('token')
+userInfoVisible = !(token === undefined || token === '' || token === null);
+
+//获取当前登录的用户信息
+export const userDetailsDTO = reactive({
+    user: {
+        userId: null,
+        userName: null,
+        nickName: null,
+        password: null,
+        avatar: null,
+        deleteFlag: null,
+        creationDate: null,
+        lastUpdateTime: null,
+    },
+    permissions: [],
+    authorities: [
+        {
+            authority: null,
+        }
+    ],
+    enabled: null,
+    username: null,
+    password: null,
+    accountNonExpired: null,
+    accountNonLocked: null,
+    credentialsNonExpired: null,
+})
+export const getUserInfo = async () => {
+    if (token !== undefined) {
+        await axios.get(
+            baseUrl + '/oauth/getUserInfo?token=' + token
+        ).then(
+            response => {
+                userDetailsDTO.value = response.data
+            }
+        )
+    }
+}
+
 
 //文章列表对象
 export let articleList = reactive({
@@ -265,4 +309,128 @@ export const getWeather = async () => {
             weatherForecastInfo.value = response.data
         }
     )
+}
+
+
+//登录
+export const userForm = reactive({
+    userName: null,
+    password: null
+})
+
+export let tokenDTO = reactive({
+    access_token: null,
+    expires_in: null
+})
+
+export const submitForm = () => {
+    //判断Cookie是否过期
+    if (Cookies.get('token')) {
+        // 跳转至index页面
+        ElMessage({
+            message: "您已登录，请勿重复登录～",
+            type: "success"
+        })
+        setTimeout(() => {
+            window.location.reload()
+        }, 1000)
+    } else {
+        axios.post(
+            baseUrl + '/oauth/login', userForm
+        ).then(
+            response => {
+                tokenDTO = response.data
+                //存储token
+                let milliSecond = new Date().getTime()
+                let expiresTime = new Date(milliSecond + tokenDTO.expires_in * 1000)
+                //是否有token或者是否合法
+                if (tokenDTO.access_token === null || tokenDTO.access_token === undefined) {
+                    //跳回登录页面
+                    ElMessage.error('用户名或密码错误！')
+                } else {
+                    Cookies.set('token', tokenDTO.access_token, {expires: expiresTime})
+                    // 跳转至index页面
+                    ElMessage({
+                        message: "登录成功，欢迎回来~",
+                        type: "success"
+                    })
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000)
+                }
+            },
+            error => {
+                ElMessage({
+                    message: "请求失败，请联系管理员！",
+                    type: "error"
+                })
+            }
+        )
+    }
+}
+
+//注册
+export const registerForm = reactive({
+    userName: null,
+    password: null,
+    confirmPassword: null
+})
+
+export const registerUser = () => {
+    if (registerForm.password.length < 8 || registerForm.confirmPassword.length < 8) {
+        ElMessage({
+            message: "密码长度不能小于8位！",
+            type: "error"
+        })
+    } else {
+        if (registerForm.password === registerForm.confirmPassword) {
+            userForm.userName = registerForm.userName
+            userForm.password = registerForm.password
+            console.log(userForm)
+            axios.post(
+                baseUrl + '/oauth/register', userForm
+            ).then(
+                response => {
+                    if (response.data.status === 200) {
+                        ElMessage({
+                            message: "注册成功！正在登录～",
+                            type: "success"
+                        })
+                        //登录
+                        submitForm()
+                    } else if (response.data.status === 500) {
+                        ElMessage({
+                            message: response.data.message,
+                            type: "error"
+                        })
+                    }
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000)
+                }
+            )
+        } else {
+            ElMessage({
+                message: "两次输入的密码不一致，请检查！",
+                type: "error"
+            })
+        }
+    }
+}
+
+//退出登录
+const config = {
+    headers: {'token': Cookies.get('token')}
+}
+export const logoutForm = () => {
+    //删除token
+    Cookies.remove('token')
+    axios.get(
+        baseUrl + '/oauth/logout', config
+    ).then(
+        response => {
+            console.log('注销成功!', response.data)
+        }
+    )
+    window.location.reload()
 }
