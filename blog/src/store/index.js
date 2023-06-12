@@ -384,6 +384,10 @@ let code = ref('')
 export const sendEmail = async () => {
     await sendEmailCode(registerForm.email)
     await checkEmailCode(registerForm.email).then(res => code.value = res)
+    return new Promise((resolve, reject) => {
+        resolve(code.value === undefined || code.value === null || code.value === '')
+        reject()
+    })
 }
 
 export const inputCode = ref('')

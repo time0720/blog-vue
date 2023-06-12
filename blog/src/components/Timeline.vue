@@ -33,6 +33,13 @@ import MenuBar from "@/components/menu/MenuBar.vue";
 
 const activities = [
     {
+        content: '新增邮箱验证码功能。',
+        timestamp: '2023-06-12',
+        size: 'large',
+        icon: SuccessFilled,
+        color: '#0bbd87'
+    },
+    {
         content: '新增登录注册、个人中心等等功能。',
         timestamp: '2023-06-09',
         size: 'large',

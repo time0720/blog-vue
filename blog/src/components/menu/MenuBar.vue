@@ -160,7 +160,9 @@
                         <el-input v-model="registerForm.email" type="text"/>
                     </el-col>
                     <el-col :span="4">
-                        <el-button type="primary" @click="sendEmail">发送</el-button>
+                        <el-button type="primary" @click="send" :disabled="sendabled">
+                            {{sendText}}
+                        </el-button>
                     </el-col>
                 </el-row>
             </el-form-item>
@@ -255,6 +257,28 @@ import {
 } from "@/store";
 import {ElMessageBox} from "element-plus";
 import router from "@/router";
+
+const sendabled = ref(false)
+let sendText = ref('')
+let timer = ref(0)
+setInterval(() => {
+    if (timer.value > 0) {
+        sendText.value = timer.value + 's'
+        sendabled.value = true
+        timer.value--
+    } else {
+        sendText.value = '发送'
+        sendabled.value = false
+    }
+}, 1000)
+const send = async () => {
+    let countFlag = ref(false)
+    await sendEmail().then(res => countFlag.value = res)
+    if (!countFlag) {
+        timer.value = 60
+    }
+}
+
 
 //登录框
 const loginDialogWidth = ref('')
