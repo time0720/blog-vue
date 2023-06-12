@@ -377,43 +377,58 @@ export const registerForm = reactive({
 })
 
 export const registerUser = () => {
-    if (registerForm.password.length < 8 || registerForm.confirmPassword.length < 8) {
+    const userNamePattern = /^[a-zA-Z0-9]{4,16}$/;
+    if (!userNamePattern.test(registerForm.userName)) {
         ElMessage({
-            message: "密码长度不能小于8位！",
+            message: '账号只能为4-16为的数字和英文字母',
+            type: "error"
+        })
+    }
+    console.log(registerForm.password)
+    if (registerForm.password === null || registerForm.password.length === null) {
+        ElMessage({
+            message: '密码不能为空',
             type: "error"
         })
     } else {
-        if (registerForm.password === registerForm.confirmPassword) {
-            userForm.userName = registerForm.userName
-            userForm.password = registerForm.password
-            console.log(userForm)
-            axios.post(
-                baseUrl + '/oauth/register', userForm
-            ).then(
-                response => {
-                    if (response.data.status === 200) {
-                        ElMessage({
-                            message: "注册成功！正在登录～",
-                            type: "success"
-                        })
-                        //登录
-                        submitForm()
-                    } else if (response.data.status === 500) {
-                        ElMessage({
-                            message: response.data.message,
-                            type: "error"
-                        })
-                    }
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 1000)
-                }
-            )
-        } else {
+        if (registerForm.password.length < 8 || registerForm.confirmPassword.length < 8) {
             ElMessage({
-                message: "两次输入的密码不一致，请检查！",
+                message: "密码长度不能小于8位！",
                 type: "error"
             })
+        } else {
+            if (registerForm.password === registerForm.confirmPassword) {
+                userForm.userName = registerForm.userName
+                userForm.password = registerForm.password
+                console.log(userForm)
+                axios.post(
+                    baseUrl + '/oauth/register', userForm
+                ).then(
+                    response => {
+                        if (response.data.status === 200) {
+                            ElMessage({
+                                message: "注册成功！正在登录～",
+                                type: "success"
+                            })
+                            //登录
+                            submitForm()
+                        } else if (response.data.status === 500) {
+                            ElMessage({
+                                message: response.data.message,
+                                type: "error"
+                            })
+                        }
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 1000)
+                    }
+                )
+            } else {
+                ElMessage({
+                    message: "两次输入的密码不一致，请检查！",
+                    type: "error"
+                })
+            }
         }
     }
 }
