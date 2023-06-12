@@ -315,7 +315,8 @@ export const getWeather = async () => {
 //登录
 export const userForm = reactive({
     userName: null,
-    password: null
+    password: null,
+    email: null
 })
 
 export let tokenDTO = reactive({
@@ -373,63 +374,79 @@ export const submitForm = () => {
 export const registerForm = reactive({
     userName: null,
     password: null,
-    confirmPassword: null
+    confirmPassword: null,
+    email: null
 })
 
+
+let code = ref('')
+export const sendEmail = async () => {
+    await sendEmailCode(registerForm.email)
+    await checkEmailCode(registerForm.email).then(res => code.value = res)
+}
+
+export const inputCode = ref('')
 export const registerUser = () => {
-    const userNamePattern = /^[a-zA-Z0-9]{4,16}$/;
-    if (!userNamePattern.test(registerForm.userName)) {
-        ElMessage({
-            message: '账号只能为4-16为的数字和英文字母',
-            type: "error"
-        })
-    }
-    console.log(registerForm.password)
-    if (registerForm.password === null || registerForm.password.length === null) {
-        ElMessage({
-            message: '密码不能为空',
-            type: "error"
-        })
-    } else {
-        if (registerForm.password.length < 8 || registerForm.confirmPassword.length < 8) {
+    if (code.value.toString() === inputCode.value) {
+        const userNamePattern = /^[a-zA-Z0-9]{4,16}$/;
+        if (!userNamePattern.test(registerForm.userName)) {
             ElMessage({
-                message: "密码长度不能小于8位！",
+                message: '账号只能为4-16为的数字和英文字母',
+                type: "error"
+            })
+        }
+        console.log(registerForm.password)
+        if (registerForm.password === null || registerForm.password.length === null) {
+            ElMessage({
+                message: '密码不能为空',
                 type: "error"
             })
         } else {
-            if (registerForm.password === registerForm.confirmPassword) {
-                userForm.userName = registerForm.userName
-                userForm.password = registerForm.password
-                console.log(userForm)
-                axios.post(
-                    baseUrl + '/oauth/register', userForm
-                ).then(
-                    response => {
-                        if (response.data.status === 200) {
-                            ElMessage({
-                                message: "注册成功！正在登录～",
-                                type: "success"
-                            })
-                            //登录
-                            submitForm()
-                        } else if (response.data.status === 500) {
-                            ElMessage({
-                                message: response.data.message,
-                                type: "error"
-                            })
-                        }
-                        setTimeout(() => {
-                            window.location.reload()
-                        }, 1000)
-                    }
-                )
-            } else {
+            if (registerForm.password.length < 8 || registerForm.confirmPassword.length < 8) {
                 ElMessage({
-                    message: "两次输入的密码不一致，请检查！",
+                    message: "密码长度不能小于8位！",
                     type: "error"
                 })
+            } else {
+                if (registerForm.password === registerForm.confirmPassword) {
+                    userForm.userName = registerForm.userName
+                    userForm.password = registerForm.password
+                    userForm.email = registerForm.email
+                    axios.post(
+                        baseUrl + '/oauth/register', userForm
+                    ).then(
+                        response => {
+                            if (response.data.status === 200) {
+                                ElMessage({
+                                    message: "注册成功！正在登录～",
+                                    type: "success"
+                                })
+                                //登录
+                                submitForm()
+                            } else if (response.data.status === 500) {
+                                ElMessage({
+                                    message: response.data.message,
+                                    type: "error"
+                                })
+                            }
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 1000)
+                        }
+                    )
+                } else {
+                    ElMessage({
+                        message: "两次输入的密码不一致，请检查！",
+                        type: "error"
+                    })
+                }
             }
         }
+    } else {
+        ElMessage({
+            message: '验证码不正确！',
+            type: "error"
+        })
     }
 }
 
@@ -448,4 +465,55 @@ export const logoutForm = () => {
         }
     )
     window.location.reload()
+}
+
+// 发送邮箱注册验证码
+export const sendEmailCode = async (email) => {
+    // 非下划线的单词字符 + 2个以上单词字符 + @ + 2位以上单词字符域名 + .2位以上小写字母做域名后缀 + (.2位以上二重域名后缀)?
+    const mailReg = /^([a-zA-Z\d][\w-]{2,})@(\w{2,})\.([a-z]{2,})(\.[a-z]{2,})?$/
+    if (mailReg.test(email)) {
+        await axios.post(
+            baseUrl + '/email/sendEmailCode?email=' + email
+        ).then(
+            response => {
+                if (response.data.status === 200) {
+                    ElMessage({
+                        message: '验证码发送成功，请检查邮箱验证码！',
+                        type: "success"
+                    })
+                } else if (response.data.status === 500) {
+                    ElMessage({
+                        message: '验证码发送失败，请稍后再试！',
+                        type: "error"
+                    })
+                } else if (response.data.status === 550) {
+                    ElMessage({
+                        message: '该邮箱已被使用！',
+                        type: "error"
+                    })
+                }
+            }
+        )
+    } else {
+        ElMessage({
+            message: '邮箱格式不正确！',
+            type: "error"
+        })
+    }
+}
+
+// 查看邮件的验证码
+export const checkEmailCode = async (email) => {
+    let code
+    await axios.get(
+        baseUrl + '/email/checkEmailCode?email=' + email
+    ).then(
+        response => {
+            code = response.data
+        }
+    )
+    return new Promise((resolve, reject) => {
+        resolve(code)
+        reject('')
+    })
 }

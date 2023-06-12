@@ -148,12 +148,25 @@
             <el-form-item label="确认密码:">
                 <el-input v-model="registerForm.confirmPassword" type="password"/>
             </el-form-item>
+            <el-form-item label="邮箱:">
+                <el-row>
+                    <el-col :span="20">
+                        <el-input v-model="registerForm.email" type="text"/>
+                    </el-col>
+                    <el-col :span="4">
+                        <el-button type="primary" @click="sendEmail">发送</el-button>
+                    </el-col>
+                </el-row>
+            </el-form-item>
+            <el-form-item label="验证码:">
+                <el-input v-model="inputCode" type="text"/>
+            </el-form-item>
         </el-form>
         <template #footer>
               <span class="dialog-footer">
                 <el-button @click="registerVisible = false">取消</el-button>
                 <el-button type="primary"
-                           @click="registerUser">
+                           @click="registerUser(inputCode)">
                   注册
                 </el-button>
               </span>
@@ -225,12 +238,13 @@ import {
 import {onMounted, ref} from "vue";
 import MenuList from "@/components/menu/MenuList.vue";
 import {
-    getUserInfo, logoutForm,
+    checkEmailCode,
+    getUserInfo, inputCode, logoutForm,
     queryArticleDetail,
     registerForm,
     registerUser,
     searchArticleList,
-    searchKeyWord,
+    searchKeyWord, sendEmail, sendEmailCode,
     submitForm, userDetailsDTO,
     userForm, userInfoVisible
 } from "@/store";
@@ -240,9 +254,9 @@ import router from "@/router";
 //登录框
 const loginDialogWidth = ref('')
 if (document.body.clientWidth > 768) {
-    loginDialogWidth.value = '23%'
+    loginDialogWidth.value = '28%'
 } else {
-    loginDialogWidth.value = '70%'
+    loginDialogWidth.value = '99%'
 }
 
 //搜索框
