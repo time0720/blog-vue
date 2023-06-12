@@ -20,6 +20,7 @@ export const userDetailsDTO = reactive({
         nickName: null,
         password: null,
         avatar: null,
+        email: null,
         deleteFlag: null,
         creationDate: null,
         lastUpdateTime: null,

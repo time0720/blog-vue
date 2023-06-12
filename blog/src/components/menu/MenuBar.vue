@@ -28,6 +28,9 @@
                                 </el-row>
                             </div>
                         </el-dropdown-item>
+                        <el-dropdown-item :icon="Message">
+                            <span style="font-size: 1rem">{{email}}</span>
+                        </el-dropdown-item>
                         <el-dropdown-item :icon="User" @click="userInfo" style="color: darkblue">
                             个人中心
                         </el-dropdown-item>
@@ -73,6 +76,9 @@
                                     <span style="font-size: 1rem">{{nickName}}</span>
                                 </el-row>
                             </div>
+                        </el-dropdown-item>
+                        <el-dropdown-item :icon="Message">
+                            <span style="font-size: 1rem">{{email}}</span>
                         </el-dropdown-item>
                         <el-dropdown-item :icon="User" @click="userInfo" style="color: darkblue">
                             个人中心
@@ -232,19 +238,18 @@
 <script setup>
 import {
     Avatar,
-    Menu,
+    Menu, Message,
     Search, Setting, User
 } from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";
 import MenuList from "@/components/menu/MenuList.vue";
 import {
-    checkEmailCode,
     getUserInfo, inputCode, logoutForm,
     queryArticleDetail,
     registerForm,
     registerUser,
     searchArticleList,
-    searchKeyWord, sendEmail, sendEmailCode,
+    searchKeyWord, sendEmail,
     submitForm, userDetailsDTO,
     userForm, userInfoVisible
 } from "@/store";
@@ -271,6 +276,7 @@ const drawer = ref(false)
 let avatar = ref('')
 let userName = ref('')
 let nickName = ref('')
+let email = ref('')
 onMounted(async () => {
     await getUserInfo()
     if (userDetailsDTO.value !== undefined) {
@@ -278,6 +284,7 @@ onMounted(async () => {
         avatar.value = userInfo.avatar
         userName.value = userInfo.userName
         nickName.value = userInfo.nickName
+        email.value = userInfo.email
     }
 })
 

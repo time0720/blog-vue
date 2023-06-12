@@ -60,6 +60,9 @@
                             <el-form-item label="昵称">
                                 <el-input v-model="userInfoForm.nickName" style="width: 200px" :placeholder="nickName"/>
                             </el-form-item>
+                            <el-form-item label="邮箱">
+                                <el-input v-model="email" style="width: 200px" disabled/>
+                            </el-form-item>
                             <el-form-item label="密码">
                                 <el-input v-model="userInfoForm.password" style="width: 200px"/>
                             </el-form-item>
@@ -80,7 +83,7 @@
 import MenuBar from "@/components/menu/MenuBar.vue";
 import {onMounted, reactive, ref} from "vue";
 import {baseUrl, getUserInfo, userDetailsDTO} from "@/store";
-import {ElMessage} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 import router from "@/router";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -89,6 +92,7 @@ import Cookies from "js-cookie";
 let avatar = ref('')
 let userName = ref('')
 let nickName = ref('')
+let email = ref('')
 onMounted(async () => {
     await getUserInfo()
     if (userDetailsDTO.value !== undefined) {
@@ -96,6 +100,7 @@ onMounted(async () => {
         avatar.value = userInfo.avatar
         userName.value = userInfo.userName
         nickName.value = userInfo.nickName
+        email.value = userInfo.email
     }
 })
 
@@ -156,31 +161,40 @@ const uploadFile = async () => {
 let token = Cookies.get('token')
 const updateUser = async () => {
     userInfoForm.token = token
-    await axios.post(
-        baseUrl + '/oauth/updateUser', userInfoForm
-    ).then(
-        response => {
-            if (response.data.status === 200) {
-                ElMessage({
-                    message: '用户信息修改成功，请重新登录',
-                    type: "success"
-                })
-                Cookies.remove('token')
-                setTimeout(() => {
-                    router.push({name: 'index'})
-                }, 1000)
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1200)
-            } else {
-                ElMessage({
-                    message: response.data.message,
-                    type: "error"
-                })
-            }
+    ElMessageBox.confirm(
+        '确定要保存当前的设置吗?',
+        '警告',
+        {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
         }
-    )
-
+    ).then(async () => {
+        await axios.post(
+            baseUrl + '/oauth/updateUser', userInfoForm
+        ).then(
+            response => {
+                if (response.data.status === 200) {
+                    ElMessage({
+                        message: '用户信息修改成功，请重新登录',
+                        type: "success"
+                    })
+                    Cookies.remove('token')
+                    setTimeout(() => {
+                        router.push({name: 'index'})
+                    }, 1000)
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1200)
+                } else {
+                    ElMessage({
+                        message: response.data.message,
+                        type: "error"
+                    })
+                }
+            }
+        )
+    })
 }
 
 
