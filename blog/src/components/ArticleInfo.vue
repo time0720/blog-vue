@@ -44,9 +44,7 @@ import 'md-editor-v3/lib/style.css';
 import AsideBar from "@/components/AsideBar.vue";
 import {
     commentsInfo,
-    currentPage,
     fillComments, getUserInfo,
-    pageSize,
     queryArticleDetail,
     selectComments,
     userDetailsDTO

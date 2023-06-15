@@ -26,9 +26,8 @@
 </template>
 
 <script setup>
-import {ChatRound, Document, Message, Timer} from "@element-plus/icons-vue";
+import {ChatRound, Message, Timer} from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";
-import {articleCount, commentsCount} from "@/store";
 
 let runningInfo = ref(0)
 onMounted(() => {
