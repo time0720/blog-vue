@@ -6,11 +6,11 @@
         </div>
         <el-container class="timeline-main" direction="vertical">
             <div class="timeline-card">
-                <h1>今年已完成的小目标：</h1>
+                <h1>已完成的小目标：</h1>
                 <br>
                 <el-timeline>
                     <el-timeline-item
-                            v-for="(activity, index) in activities"
+                            v-for="(activity, index) in activityList.value"
                             :key="index"
                             :icon="activity.icon"
                             :type="activity.type"
@@ -18,8 +18,17 @@
                             :size="activity.size"
                             :hollow="activity.hollow"
                             :timestamp="activity.timestamp"
+                            :placement="'top'"
                     >
-                        {{ activity.content }}
+                        <el-progress
+                                :text-inside="true"
+                                :stroke-width="16"
+                                :percentage="activity.percentage"
+                                :color="customPercentageColor(activity.percentage)"
+                        />
+                        <el-card>
+                            {{ activity.content }}
+                        </el-card>
                     </el-timeline-item>
                 </el-timeline>
             </div>
@@ -28,67 +37,24 @@
 </template>
 
 <script setup>
-import {MoreFilled, SuccessFilled} from '@element-plus/icons-vue'
 import MenuBar from "@/components/menu/MenuBar.vue";
+import {activitieList, activityList, selectAllActivities} from "@/store";
+import {onMounted} from "vue";
 
-const activities = [
-    {
-        content: '新增邮箱验证码功能。',
-        timestamp: '2023-06-12',
-        size: 'large',
-        icon: SuccessFilled,
-        color: '#0bbd87'
-    },
-    {
-        content: '新增登录注册、个人中心等等功能。',
-        timestamp: '2023-06-09',
-        size: 'large',
-        icon: SuccessFilled,
-        color: '#0bbd87'
-    },
-    {
-        content: '添加了时间线，对，就是这个页面',
-        timestamp: '2023-06-06',
-        size: 'large',
-        icon: SuccessFilled,
-        color: '#0bbd87'
-    },
-    {
-        content: '添加了天气信息-闲的没事自己看看',
-        timestamp: '2023-06-05',
-        size: 'large',
-        icon: SuccessFilled,
-        color: '#0bbd87'
-    },
-    {
-        content: '新增转盘功能-决定吃什么，这个很好，解决了世纪难题',
-        timestamp: '2023-05-19',
-        size: 'large',
-        icon: SuccessFilled,
-        color: '#0bbd87',
-    },
-    {
-        content: '添加了搜索接口-part1',
-        timestamp: '2023-05-16',
-        size: 'large',
-        icon: MoreFilled,
-        color: '#0bbd87'
-    },
-    {
-        content: '新增评论区功能-part1',
-        timestamp: '2023-05-08',
-        size: 'large',
-        icon: MoreFilled,
-        color: '#0bbd87'
-    },
-    {
-        content: '网站正式上线',
-        timestamp: '2023-05-08',
-        size: 'large',
-        icon: SuccessFilled,
-        color: '#0bbd87'
-    },
-]
+onMounted(() => {
+    selectAllActivities()
+})
+
+const customPercentageColor = (percentage) => {
+    if (percentage < 30) {
+        return '#909399'
+    }
+    if (percentage < 70) {
+        return '#e6a23c'
+    }
+    return '#0bbd87'
+}
+
 
 </script>
 

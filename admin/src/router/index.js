@@ -28,6 +28,16 @@ const routes = [
         path: '/comments',
         name: 'comments',
         component: () => import('../components/Comments.vue')
+    },
+    {
+        path: '/user',
+        name: 'user',
+        component: () => import('../components/User.vue')
+    },
+    {
+        path: '/timeline',
+        name: 'timeline',
+        component: () => import('../components/Timeline.vue')
     }
 ];
 const router = createRouter({

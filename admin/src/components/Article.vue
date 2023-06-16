@@ -1,11 +1,9 @@
 <template>
     <!--blog后台管理-->
     <el-container direction="vertical" class="base-container">
-        <div class="header-blog">
-            <h1 class="title-blog">文章列表</h1>
-        </div>
+        <HeaderBar/>
         <el-container class="main-container">
-            <div class="side-blog">
+            <div>
                 <SideMenuBar/>
             </div>
             <div class="article-container">
@@ -95,6 +93,7 @@ import SideMenuBar from "@/components/SideMenuBar.vue";
 import {Search} from "@element-plus/icons-vue";
 import {useRouter} from "vue-router";
 import {ElMessage, ElMessageBox} from "element-plus";
+import HeaderBar from "@/components/HeaderBar.vue";
 
 const baseUrl = inject('baseUrl')
 
@@ -219,50 +218,30 @@ let pageSize = 10
 const handleSizeChange = (value) => {
     articleQuery.pageSize = value
     pageSize = value
-    console.log(pageSize)
     selectArticles()
 }
 let currentPage = 1
 const handleCurrentChange = (value) => {
     articleQuery.pageNum = value
     currentPage = value
-    console.log(currentPage)
     selectArticles()
 }
 </script>
 
 <style scoped>
 .base-container {
-    background-image: url("https://time7.top:9000/blog/back_index.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
+    background-color: #FFFFFF;
     min-width: 100vw;
     min-height: 100vh;
 }
 
 .main-container {
-    width: 88vw;
-}
-
-.header-blog {
-    background-image: url("https://time7.top:9000/blog/moon.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
-    width: 100vw;
-    height: 40vh;
-}
-
-.title-blog {
-    color: white;
-    text-align: center;
-    margin-top: 10%;
-    font-size: 30px;
+    width: 95vw;
 }
 
 .article-container {
     margin-top: 5vh;
+    margin-left: 2vw;
     width: 85vw;
 }
 

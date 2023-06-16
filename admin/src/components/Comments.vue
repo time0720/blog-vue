@@ -6,25 +6,23 @@
             <div>
                 <SideMenuBar/>
             </div>
-            <div class="main-blog">
+            <div class="comments-container">
                 <!--评论列表-->
-                <div class="main-blog">
-                    <el-table :data="commentsList.value"
-                              border
-                              style="width: 100%">
-                        <el-table-column prop="commentsId" label="评论ID" width="80"/>
-                        <el-table-column prop="commentsName" label="评论人名称" width="100"/>
-                        <el-table-column prop="ip" label="评论人的IP" width="150"/>
-                        <el-table-column prop="address" label="评论人的地域地址" width="150"/>
-                        <el-table-column prop="content" label="评论的内容" width="400"/>
-                        <el-table-column prop="creationDate" label="评论的时间" width="170"/>
-                        <el-table-column label="操作" fixed="right">
-                            <template #default="scope">
-                                <el-button @click="handleDelete(scope.row)">删除</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                </div>
+                <el-table :data="commentsList.value"
+                          border
+                          style="width: 100%">
+                    <el-table-column prop="commentsId" label="评论ID" width="80"/>
+                    <el-table-column prop="commentsName" label="评论人名称" width="100"/>
+                    <el-table-column prop="ip" label="评论人的IP" width="150"/>
+                    <el-table-column prop="address" label="评论人的地域地址" width="150"/>
+                    <el-table-column prop="content" label="评论的内容" width="400"/>
+                    <el-table-column prop="creationDate" label="评论的时间" width="170"/>
+                    <el-table-column label="操作" fixed="right">
+                        <template #default="scope">
+                            <el-button @click="handleDelete(scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
                 <!--分页组件-->
                 <el-pagination
                         background
@@ -45,13 +43,13 @@
 <script setup>
 
 import SideMenuBar from "@/components/SideMenuBar.vue";
-import {inject, onMounted, reactive, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {ElMessage, ElMessageBox} from "element-plus";
 import Cookies from "js-cookie";
 import HeaderBar from "@/components/HeaderBar.vue";
+import {baseUrl} from "@/store";
 
-const baseUrl = inject('baseUrl')
 const commentsList = reactive({
     value: [{
         commentsId: null,
@@ -155,17 +153,21 @@ const handleCurrentChange = (value) => {
 <style scoped>
 
 .base-container {
-    background-image: url("https://time7.top:9000/blog/back_index.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
+    background-color: #FFFFFF;
     min-width: 100vw;
     min-height: 100vh;
 }
 
+.main-container {
+    width: 95vw;
+}
 
-.main-blog {
+.comments-container {
+    margin-left: 2vw;
+    margin-top: 10vh;
     width: 85vw;
+    margin-bottom: 5vh;
+    text-align: right;
 }
 
 .comments-pagination {
@@ -173,4 +175,5 @@ const handleCurrentChange = (value) => {
     margin-bottom: 20px;
     justify-content: center;
 }
+
 </style>

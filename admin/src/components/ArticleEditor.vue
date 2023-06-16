@@ -1,9 +1,7 @@
 <template>
     <!--后台文章编辑器-->
     <el-container direction="vertical" class="base-container">
-        <div class="header-blog">
-            <h1 class="title-blog">再写一篇吧~</h1>
-        </div>
+        <HeaderBar/>
         <el-container class="main-container">
             <!--侧边菜单栏-->
             <div>
@@ -82,6 +80,7 @@ import {useRouter} from "vue-router";
 import {UploadFilled} from "@element-plus/icons-vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import Cookies from "js-cookie";
+import HeaderBar from "@/components/HeaderBar.vue";
 
 const baseUrl = inject('baseUrl')
 const editFlag = history.state.hasOwnProperty('article')
@@ -249,29 +248,11 @@ const onUploadImg = async (files) => {
 </script>
 
 <style scoped>
-.title-blog {
-    color: white;
-    text-align: center;
-    margin-top: 10%;
-    font-size: 30px;
-}
 
 .base-container {
-    background-image: url("https://time7.top:9000/blog/back_index.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
+    background-color: #FFFFFF;
     min-width: 100vw;
     min-height: 100vh;
-}
-
-.header-blog {
-    background-image: url("https://time7.top:9000/blog/sunset.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
-    width: 100vw;
-    height: 40vh;
 }
 
 .main-container {

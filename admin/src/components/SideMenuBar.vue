@@ -1,9 +1,10 @@
 <template>
-    <div class="article-menu-bar">
+    <el-aside class="article-menu-bar">
 <!--        <h1>管理菜单</h1>-->
         <el-menu
             :router="true"
-            background-color="#AFEEEE"
+            background-color="#F0F2F5"
+            class="el-menu-container"
         >
             <el-menu-item index="/index">
                 <el-icon><setting/></el-icon>
@@ -20,21 +21,32 @@
             <el-menu-item index="/comments">
                 <el-icon><ChatDotSquare/></el-icon>评论
             </el-menu-item>
+            <el-menu-item index="/user">
+                <el-icon><Avatar/></el-icon>用户
+            </el-menu-item>
+            <el-menu-item index="/timeline">
+                <el-icon><Timer/></el-icon>活动
+            </el-menu-item>
         </el-menu>
-    </div>
+    </el-aside>
 </template>
 
 <script setup>
-import {Location, Setting, ChatDotSquare} from "@element-plus/icons-vue";
+import {Location, Setting, ChatDotSquare, Avatar, Timer} from "@element-plus/icons-vue";
 
 </script>
 
 <style scoped>
 .article-menu-bar {
+    height: 100%;
 }
 
 .article-menu-bar:not(.el-menu--collapse) {
     width: 15vw;
     min-height: 15vh;
+}
+
+.el-menu-container {
+    height: 100%;
 }
 </style>

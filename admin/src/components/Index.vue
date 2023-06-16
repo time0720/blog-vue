@@ -22,10 +22,7 @@ import HeaderBar from "@/components/HeaderBar.vue";
 
 
 .base-container {
-    background-image: url("https://time7.top:9000/blog/back_index.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
+    background-color: #FFFFFF;
     min-width: 100vw;
     min-height: 100vh;
 }

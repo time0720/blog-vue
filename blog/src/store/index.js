@@ -522,3 +522,24 @@ export const checkEmailCode = async (email) => {
         reject('')
     })
 }
+
+// 查询所有的时间线活动
+export const activityList = reactive({
+    value: [{
+        activityId: null,
+        content: null,
+        timestamp: null,
+        size: null,
+        color: null,
+        percentage: null
+    }]
+})
+export const selectAllActivities = () => {
+    axios.get(
+        baseUrl + '/activity/selectAll'
+    ).then(
+        response => {
+            activityList.value = response.data.data
+        }
+    )
+}
