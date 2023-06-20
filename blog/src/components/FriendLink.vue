@@ -73,7 +73,7 @@ const openHTML = () => {
 }
 
 const gotoFriend = (linkUrl) => {
-    location.replace(linkUrl)
+    window.open(linkUrl)
 }
 </script>
 
