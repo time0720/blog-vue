@@ -88,6 +88,7 @@
 <!--        <el-menu-item index="4-2" class="menu-sub-item"><el-icon><VideoPlay/></el-icon>音频</el-menu-item>-->
 <!--    </el-sub-menu>-->
     <el-menu-item index="/comments" class="menu-item"><el-icon><Comment/></el-icon>评论区</el-menu-item>
+    <el-menu-item index="/friend" class="menu-item"><el-icon><Link/></el-icon>友链</el-menu-item>
 </template>
 
 <script>
@@ -97,7 +98,7 @@ import {
     Compass,
     Document,
     FolderOpened, Food,
-    House, Sunrise, Timer,
+    House, Link, Sunrise, Timer,
     VideoPlay,
     View
 } from "@element-plus/icons-vue";
@@ -107,6 +108,7 @@ export default {
     name: "MenuList",
     methods: {queryArticleDetail},
     components: {
+        Link,
         Timer,
         Sunrise,
         Food, Comment, Document, FolderOpened, Collection, VideoPlay, View, ChatLineRound, House, Compass}

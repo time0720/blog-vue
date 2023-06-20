@@ -46,6 +46,11 @@ const routes = [
         path: '/userInfo',
         name: 'userInfo',
         component: () => import('../components/UserInfo.vue')
+    },
+    {
+        path: '/friend',
+        name: 'friend',
+        component: () => import('../components/FriendLink.vue')
     }
 ];
 const router = createRouter({

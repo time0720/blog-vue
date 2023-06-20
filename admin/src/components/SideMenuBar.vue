@@ -27,12 +27,15 @@
             <el-menu-item index="/timeline">
                 <el-icon><Timer/></el-icon>活动
             </el-menu-item>
+            <el-menu-item index="/friend">
+                <el-icon><Link/></el-icon>友链
+            </el-menu-item>
         </el-menu>
     </el-aside>
 </template>
 
 <script setup>
-import {Location, Setting, ChatDotSquare, Avatar, Timer} from "@element-plus/icons-vue";
+import {Location, Setting, ChatDotSquare, Avatar, Timer, Link} from "@element-plus/icons-vue";
 
 </script>
 

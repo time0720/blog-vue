@@ -7,7 +7,6 @@
                 <SideMenuBar/>
             </div>
             <div class="timeline-container">
-                <!--评论列表-->
                 <div class="timeline-btn">
                     <el-button type="primary" @click="handleAdd(activity)">
                         <el-icon><Plus/></el-icon>新增
@@ -88,6 +87,9 @@ const handleEdit = (row) => {
 
 const handleCancel = (row) => {
     row.isEdit = false
+    if (row.activityId === null || row.activityId === undefined) {
+        activityList.value.shift()
+    }
 }
 
 const handleAdd = (row) => {

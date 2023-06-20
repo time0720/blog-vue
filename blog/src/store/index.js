@@ -543,3 +543,24 @@ export const selectAllActivities = () => {
         }
     )
 }
+
+// 查询所有的友链信息
+export const friendLinkList = reactive({
+    value: [{
+        linkId: null,
+        avatar: null,
+        linkUrl: null,
+        linkName: null,
+        creationDate: null,
+        deleteFlag: null
+    }]
+})
+export const selectFriendLink = () => {
+    axios.get(
+        baseUrl + '/friend/selectFriendLink'
+    ).then(
+        response => {
+            friendLinkList.value = response.data.data
+        }
+    )
+}

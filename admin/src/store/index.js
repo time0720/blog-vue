@@ -130,3 +130,54 @@ export const saveArticle = async (article) => {
     }
     await location.reload()
 }
+
+// 查询所有的友链信息
+export const friendLinkList = reactive({
+    value: [{
+        linkId: null,
+        avatar: null,
+        linkUrl: null,
+        linkName: null,
+        creationDate: null,
+        deleteFlag: null,
+        isEdit: null
+    }]
+})
+export const friendLink = reactive({
+    avatar: null,
+    linkUrl: null,
+    linkName: null,
+    isEdit: null
+})
+export const selectFriendLink = () => {
+    axios.get(
+        baseUrl + '/friend/selectFriendLink'
+    ).then(
+        response => {
+            friendLinkList.value = response.data.data
+            friendLinkList.value.forEach(friend => {
+                friend.isEdit = false
+            })
+        }
+    )
+}
+
+// 添加友链信息
+export const addFriendLink = async (friendLink) => {
+    const res = await axios.post(
+        baseUrl + '/admin/addFriendLink', friendLink,
+        {
+            headers: {
+                'content-type': 'application/json',
+                'token': token
+            }
+        }
+    )
+    if (res.data.status === 200) {
+        ElMessage({
+            message: '保存成功！',
+            type: "success"
+        })
+    }
+    await location.reload()
+}

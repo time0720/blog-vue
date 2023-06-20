@@ -38,6 +38,11 @@ const routes = [
         path: '/timeline',
         name: 'timeline',
         component: () => import('../components/Timeline.vue')
+    },
+    {
+        path: '/friend',
+        name: 'friend',
+        component: () => import('../components/FriendLink.vue')
     }
 ];
 const router = createRouter({
