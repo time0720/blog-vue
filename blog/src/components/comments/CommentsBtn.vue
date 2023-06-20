@@ -12,10 +12,26 @@
             :before-close="handleClose"
     >
         我的名字：<el-input style="width: 25%" v-model="commentsInfo.commentsName"></el-input>
+        &nbsp;&nbsp;
+        <el-popover trigger="click" :width="400" placement="right">
+            <template #reference >
+                <el-button style="font-size: 1.5rem">😀</el-button>
+            </template>
+            <el-row>
+                <el-col
+                        v-for="(emoji, index) of emojis"
+                        :key="index"
+                        @click="handleEmoji(emoji)"
+                        :span="3"
+                >
+                    <el-text style="font-size: 2rem">{{emoji}}</el-text>
+                </el-col>
+            </el-row>
+        </el-popover>
         <el-input
                 type="textarea"
                 class="comments-text"
-                :rows="12"
+                :rows="4"
                 v-model="commentsInfo.content"
         >
         </el-input>
@@ -33,6 +49,7 @@
 import {commentsInfo, saveComments} from "@/store";
 import {ref} from "vue";
 import {ElMessageBox} from "element-plus";
+import {emojis} from "@/components/EmojiExtension/data";
 
 let dialogVisible = ref(false)
 
@@ -48,6 +65,14 @@ const handleClose = (done) => {
     })
 }
 
+const handleEmoji = (emoji) => {
+    if (commentsInfo.content === null) {
+        commentsInfo.content = '' + emoji
+    } else {
+        commentsInfo.content += emoji
+    }
+}
+
 let dialogWidth
 if (screen.width >= 768) {
     dialogWidth = '40%'
@@ -61,5 +86,9 @@ if (screen.width >= 768) {
     color: white;
     text-align: center;
     font-size: 2rem;
+}
+
+.comments-text {
+    font-size: 1.5rem;
 }
 </style>

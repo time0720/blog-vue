@@ -99,7 +99,6 @@ onMounted(async () => {
 
 .comments-bg {
     color: white;
-    text-align: center;
     margin-top: 10%;
     font-size: 2rem;
 }
